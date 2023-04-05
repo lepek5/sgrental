@@ -1,0 +1,20 @@
+version: "3"
+services:
+  sgr-frontend:
+    build:
+      context: .
+      dockerfile: ./front/dev.Dockerfile
+    container_name: sgr-frontend
+    image: sgr-frontend
+    restart: always
+    volumes:
+      - /usr/app/service
+      - ./front/src:/usr/app/src
+      - ./front/dist:/usr/app/dist
+    networks:
+      - "sgr-network"
+    ports:
+      - "4000:4000"
+networks:
+  sgr-network:
+    driver: bridge
