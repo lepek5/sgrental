@@ -1,0 +1,6 @@
+:root {
+  --must-blue: #00559F;
+}
+h1 {
+  color: var(--must-blue);
+}
