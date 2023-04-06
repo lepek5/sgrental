@@ -1,5 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import SGRental from "./SGRental";
 
-ReactDOM.render(<SGRental /> , document.querySelector("#sgrental"));
+const container = document.querySelector("#sgrental");
+const root = ReactDOM.createRoot(container);
+root.render(<SGRental />);

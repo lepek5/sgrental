@@ -1,10 +1,18 @@
 import React from "react"
+import Header from "./components/Header";
 import LandingPage from "./pages/Landing.page"
 
-const SGRental = ()=> {
+import "../public/sgrental.css";
+import Footer from "./components/Footer";
+
+const SGRental = () => {
   return (
     <>
-    <LandingPage />
+      <Header />
+      <section id="page-content">
+        <LandingPage />
+      </section>
+      <Footer />
     </>
   )
 };

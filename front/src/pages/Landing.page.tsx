@@ -1,9 +1,10 @@
 import React from "react"
+import Products from "../components/Products";
 
 const LandingPage = () => {
   return (
     <>
-    <h1>Urheiluvälinevuokraamo Oy</h1>
+    <Products />
     </>
   )
 };
