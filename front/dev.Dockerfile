@@ -1,7 +1,7 @@
 FROM node:alpine
-WORKDIR /usr/frontend
-COPY ./front/package*.json ./
+WORKDIR /usr/src/app
+COPY ./package*.json ./
 RUN npm install 
-COPY ./front/ ./
+COPY . ./
 EXPOSE 4000
 CMD npm run dev
