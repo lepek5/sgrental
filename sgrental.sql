@@ -1,4 +1,4 @@
-create table users (
+create table if not exists users (
   id int unsigned not null auto_increment primary key,
   name varchar(100) not null,
   email varchar(100) not null unique,
@@ -6,17 +6,16 @@ create table users (
   dob date,
   address varchar(120)
 );
-
-create table products (
+create table if not exists products (
   id int unsigned not null auto_increment primary key,
-  title varchar not null,
-  description varchar,
-  tags varchar,
+  title varchar(100) not null,
+  description varchar(100),
+  tags varchar(255),
   price int not null
 );
 
-create table reservations (
-  id int  unsigned not null auto_increment primary key,
+create table if not exists reservations (
+  id int unsigned not null auto_increment primary key,
   product_id int unsigned,
   user_id int unsigned,
   created_at date not null,
@@ -25,11 +24,11 @@ create table reservations (
   isAccepted boolean,
   isPayed boolean,
   constraint fk_user_id foreign key (user_id) references users (id),
-  constraint fk_product_id foregn key (product_id) references products(id)
+  constraint fk_product_id foreign key (product_id) references products(id)
 );
 
-create table sellers (
+create table if not exists sellers (
   id int unsigned not null auto_increment primary key,
   user_id int unsigned,
-  constraint fk_user_id foreign key (user_id) references users(id)
+  constraint fk_seller_id foreign key (user_id) references users(id)
 );

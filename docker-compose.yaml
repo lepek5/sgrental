@@ -9,12 +9,27 @@ services:
     restart: always
     volumes:
       - /usr/app/service
-      - ./front/src:/usr/app/src
-      - ./front/dist:/usr/app/dist
+      - ./front/src:/usr/frontend/src
+      - ./front/dist:/usr/frontend/dist
     networks:
       - "sgr-network"
     ports:
       - "4000:4000"
+  sgr-backend:
+    build:
+      context: .
+      dockerfile: ./backend/dev.Dockerfile
+    container_name: sgr-backend
+    image: sgr-backend
+    restart: always
+    volumes:
+      - /usr/app/service
+      - ./backend:/usr/backend/app
+      - ./backend/dist:/usr/backend/dist
+    networks:
+      - "sgr-network"
+    ports:
+      - "13331:13331"
 networks:
   sgr-network:
     driver: bridge
