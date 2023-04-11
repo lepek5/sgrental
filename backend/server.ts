@@ -3,7 +3,9 @@ import cors from "cors";
 import config from "./config";
 import Api from "./routes";
 const server = express();
-server.use(cors());
+server.use(cors({
+  origin: "http://localhost:4000"
+}));
 server.use(express.json());
 
 server.use("/api", Api);

@@ -13,6 +13,7 @@ const ParseProductTagsToArray = (tags: string) => tags === null ? [] : tags.spli
 
 const ProductService = {
   getAll: async (): Promise<SGRRespond> => {
+    console.log("service")
     var conn;
     const sql = "SELECT * FROM products";
     try {
@@ -50,6 +51,25 @@ const ProductService = {
     } finally {
       ReleaseConnection(connection);
     }
+  },
+  addProduct: async (product: any): Promise<ProductDB | any> => {
+    var conn;
+    var sqlStart = "INSERT INTO products (";
+    const keys = Object.keys(product);
+    const values = parseValues(Object.values(product));
+    sqlStart += keys.join(",");
+    sqlStart += ")";
+    sqlStart += " VALUES (";
+    sqlStart += values.join(",");
+    sqlStart += ")";
+    console.log(keys, values);
+    console.log(sqlStart)
+    conn = await Database.getConnection();
+    const res = await conn.query(sqlStart);
+    return res;
   }
 };
 export default ProductService;
+const parseValues = (arr: string[]) => {
+  return arr.map(i => "\'"+i+"\'");
+};

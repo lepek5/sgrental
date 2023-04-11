@@ -28,10 +28,12 @@ module.exports = {
   devServer: {
     port: 4000,
     open: true,
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   output: {
     filename: 'sgrental.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: "/"
   },
 };
