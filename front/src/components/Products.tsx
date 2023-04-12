@@ -1,30 +1,58 @@
+import { parse } from "path";
 import React, { useEffect, useState } from "react";
+import { IProductUI } from "../interfaces/IProduct";
+import ProductService from "../services/ProductService";
 import Product from "./Product";
+import ProductModal from "./Product.modal";
+import ProductsNavbar from "./Products.Navbar";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProductUI[]>([]);
+  const [filters, setFilters] = useState<string>("");
+  const [filtered, setFiltered] = useState<IProductUI[]>([]);
   useEffect(() => {
     const getProductData = async () => {
-      const request = await fetch('https://mock.shop/api?query={products(first:%2020){edges%20{node%20{id%20title%20description%20featuredImage%20{id%20url}%20variants(first:%203){edges%20{node%20{price%20{amount%20currencyCode}}}}}}}}')
-      const response = await request.json();
-      const res = response.data.products.edges.map((r: { node: any; }) => r.node);
-      setProducts(res);
+      const request = await ProductService.getAll();
+      setProducts(request.data);
     };
     getProductData();
-  },[]);
-  const getProducts = () => {
-    return products.map(p => {
-      console.log(p)
-      return p
+  }, []);
+  useEffect(() => {
+    const separatedFilters = filters.split(" ");
+    var fal: IProductUI[] = [];
+    const isElegible = (product: any, filter: string) => {
+      Object.values(product).forEach(key => {
+        if (key instanceof Array) {
+          isElegible(key, filter);
+        }
+        if (!fal.includes(product) && key.toString().toLowerCase().indexOf(filter.toLowerCase()) > -1) {
+          fal.push(product);
+          return true;
+        }
+      });
+      return false;
+    }
+    separatedFilters.forEach(filter => {
+      products.forEach(product => {
+        do {
+          isElegible(product, filter)
+        } while (false);
+      })
     });
+    setFiltered(fal);
+  }, [filters]);
+  const parseFilters = (filter: string) => {
+    setFilters(filter);
   }
-
   if (products.length < 1) return (<><p>Loading...</p></>);
   return (
-    <section id="products">{
-      getProducts().map(p => <Product product={p} />)
-    }
-    </section>
+    <>
+      <section id="products">
+        <ProductsNavbar parseFilters={parseFilters} />
+        {filtered.length > 0 ? filtered.map(f => <Product key={f.id} product={f} />) : products.map(f => <Product key={f.id} product={f} />)}
+        <ProductModal visible={true} />
+      </section>
+    </>
   )
 }
 export default Products;

@@ -1,23 +1,19 @@
-import React from "react";
-interface Product {
-  id: string,
-  title: string,
-  description: string,
-  featuredImage: fImage
-}
-interface fImage {
-  id: string,
-  url: string
-}
-const Product = ({ product }: { product: Product }) => {
-  const { id, title, description, featuredImage } = product;
-  console.log(id, title, description, featuredImage.url);
+import React, { useState } from "react";
+import { IProductUI } from "../interfaces/IProduct";
+import ProductModal from "./Product.modal";
+const Product = ({ product }: { product: IProductUI }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
+  }
+  if (!product) return <>no product</>
   return (
     <>
-      <div className="card" key={id}>
-        <img src={featuredImage.url} alt="product image" />
-        <div className="title">{title}</div>
-        <div className="description">{description}</div>
+      <div onClick={handleModal} className={modalOpen ? "card" : "card"} key={product.id}>
+        <div className="title">{product.title}</div>
+        <div className="description">{product.description}</div>
+        <div className="price">{product.price}</div>
+        <em>{product?.tags?.join(", ")}</em>
       </div>
     </>
   )

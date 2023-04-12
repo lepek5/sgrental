@@ -5,22 +5,23 @@ import LandingPage from "./pages/Landing.page"
 import "../public/sgrental.css";
 import Footer from "./components/Footer";
 import EmployeePage from "./pages/Employee.page";
-import { BrowserRouter as Router, Routes, Route, Link  } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard.page";
+import Products from "./components/Products";
+import ReservationPage from "./pages/Reservations.page";
 
 const SGRental = () => {
   return (
     <>
-      <Header />
-      <section id="page-content">
         <Router>
+          <Header />
           <Routes>
             <Route path="dash/*" element={<DashboardPage />} />
             <Route path="employee" element={<EmployeePage />} />
-            <Route path="/" element={<LandingPage  />} />
+            <Route path="products/*" element={<Products />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </Router>
-      </section>
       <Footer />
     </>
   )
