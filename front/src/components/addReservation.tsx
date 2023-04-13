@@ -16,7 +16,11 @@ const AddReservation = () => {
   }
   return (
     <div onClick={handleReservationSubmit}>
-      
+      <form>
+        <div className="input-set">
+          <label htmlFor=""></label>
+        </div>
+      </form>
       AddReservation</div>
   )
 }

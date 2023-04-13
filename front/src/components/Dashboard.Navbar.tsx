@@ -10,7 +10,7 @@ const DashboardNavbar = () => {
       <ul id="nav-items" className="dashboard-nav">
         <li className="nav-link"><Link to="add-product">Lisää tuote</Link></li>
         <li className="nav-link"><Link to="reservations">Varaukset</Link></li>
-        <li className="nav-link">Tuotteet</li>
+        <li className="nav-link"><Link to="users">Käyttäjät</Link></li>
         <li className="nav-link">Tilastot</li>
         <li className="nav-link">Omat varaukset</li>
       </ul>
