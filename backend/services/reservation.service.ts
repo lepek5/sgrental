@@ -1,5 +1,5 @@
 import Database from "../database";
-import { IReservation } from "../interfaces/reservation";
+import { IReservation } from "../interfaces/IReservation";
 
 const getAll = async () => {
   var conn;

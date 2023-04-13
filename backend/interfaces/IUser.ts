@@ -1,4 +1,7 @@
 export interface IUser {
-  email: string,
+  id?: number,
+  email: string
+};
+export interface IUserLogin extends IUser {
   password: string
 }

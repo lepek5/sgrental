@@ -1,4 +1,4 @@
-import { IReservation } from "../interfaces/reservation";
+import { IReservation } from "../interfaces/IReservation";
 import reservationService from "../services/reservation.service";
 import { Request, Response } from "express";
 

@@ -1,16 +1,24 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import userService from "../services/user.service";
+import { httpStatus } from "../utils/httpStatus";
 
 const userController = {
-  createUser: async (req: Request, res: Response) => {
+  createUser: async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
-    console.log("body", body)
     try {
-      console.log(body);
       const result = await userService.createUser(body);
-      console.log("result", result)
+      res.status(httpStatus.CREATED).json({"Account created": "ok"});
     } catch (err) {
-      console.error(err);
+      next(err);
+    }
+  },
+  getAll: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await userService.getAll();
+      console.log("Controller result", result)
+      res.status(httpStatus.OK).json(result);
+    } catch (err) {
+      next(err);
     }
   }
 }
