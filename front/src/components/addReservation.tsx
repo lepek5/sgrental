@@ -7,9 +7,10 @@ const AddReservation = () => {
   const reservation: IReservation = {
     product_id: 1,
     user_id: 2,
-    is_valid: false,
-    is_payed: false,
-    start_date: startDate
+    employee_id: 0,
+    start_at: "",
+    confirmed: false,
+    completed: false
   }
   const handleReservationSubmit = async () => {
     const res = await ReservationService.createReservation(reservation);

@@ -1,10 +1,9 @@
-export interface IProductUI {
+export interface IProduct {
   id?: number
   title: string,
   description?: string,
-  tags?: string[],
   price: number
 }
-export interface IProductDB extends Omit<IProductUI, "tags"> {
+export interface IProductDB extends Omit<IProduct, "tags"> {
   tags?: string
 }

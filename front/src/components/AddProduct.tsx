@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { IProductDB, IProductUI } from "../interfaces/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 import ProductService from "../services/ProductService";
 const emptyProduct = {
   title: "",
@@ -8,7 +8,7 @@ const emptyProduct = {
 };
 
 const AddProduct = () => {
-  const [product, setProduct] = useState<IProductDB>(emptyProduct);
+  const [product, setProduct] = useState<IProduct>(emptyProduct);
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     var value = event.target.value;
     var key = event.target.id;

@@ -1,25 +1,24 @@
-import { parse } from "path";
 import React, { useEffect, useState } from "react";
-import { IProductUI } from "../interfaces/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 import ProductService from "../services/ProductService";
 import Product from "./Product";
 import ProductModal from "./Product.modal";
 import ProductsNavbar from "./Products.Navbar";
 
 const Products = () => {
-  const [products, setProducts] = useState<IProductUI[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [filters, setFilters] = useState<string>("");
-  const [filtered, setFiltered] = useState<IProductUI[]>([]);
+  const [filtered, setFiltered] = useState<IProduct[]>([]);
   useEffect(() => {
     const getProductData = async () => {
       const request = await ProductService.getAll();
-      setProducts(request.data);
+      setProducts(request);
     };
     getProductData();
   }, []);
   useEffect(() => {
     const separatedFilters = filters.split(" ");
-    var fal: IProductUI[] = [];
+    var fal: IProduct[] = [];
     const isElegible = (product: any, filter: string) => {
       Object.values(product).forEach(key => {
         if (key instanceof Array) {
@@ -44,6 +43,7 @@ const Products = () => {
   const parseFilters = (filter: string) => {
     setFilters(filter);
   }
+  if (!products) return <h3>FUCK YOU! NOT PRODUCTS FOR YOU!</h3>
   if (products.length < 1) return (<><p>Loading...</p></>);
   return (
     <>

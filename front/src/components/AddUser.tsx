@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import { ICustomer } from "../interfaces/ICustomer";
+import { IUser, IUserLogin } from "../interfaces/IUser";
 import UserService from "../services/UserService";
 
 const AddUser = () => {
-  const [user, setUser] = useState<ICustomer>({
-    name: "",
-    phone: "",
-    address: "",
-    date_of_birth: ""
+  const [user, setUser] = useState<IUserLogin>({
+    email: "",
+    password: ""
   });
+  const [confirmation, setConfirmation] = useState("");
   const handleInputChange = (event: any) => {
     const { id, value } = event.target;
     setUser({ ...user, [id]: value });
@@ -22,28 +21,18 @@ const AddUser = () => {
     <form onSubmit={onSubmit}>
       <h2>Rekisteröi käyttäjä</h2>
       <div className="form-item">
-        <label htmlFor="name">Nimi</label>
-        <input onChange={handleInputChange} placeholder="" type="text" id="name" name="name" />
-      </div>
-
-      <div className="form-item">
         <label htmlFor="name">Sähköposti</label>
-        <input onChange={handleInputChange} placeholder="esim. otto@kaeyttaejae.org" type="text" id="email" name="email" />
+        <input onChange={handleInputChange} placeholder="" type="text" id="email" name="email" />
       </div>
 
       <div className="form-item">
-        <label htmlFor="name">Osoite</label>
-        <input onChange={handleInputChange} placeholder="esim. Olavinkatu 25 b 12 57100 Savonlinna" type="text" id="address" name="address" />
+        <label htmlFor="name">Salasana</label>
+        <input onChange={handleInputChange} placeholder="..salasana.." type="password" id="password" name="password" />
       </div>
 
       <div className="form-item">
-        <label htmlFor="name">Puhelinnumero</label>
-        <input onChange={handleInputChange} placeholder="esim. 041 1234321" type="text" id="phone" name="phone" />
-      </div>
-
-      <div className="form-item">
-        <label htmlFor="name">Syntymäaika</label>
-        <input onChange={handleInputChange} placeholder="" type="date" id="date_of_birth" name="date_of_birth" />
+        <label htmlFor="name">Salasanan varmennus</label>
+        <input onChange={(e) => setConfirmation(e.target.value)} placeholder="..salasana uudelleen.." type="password" id="password_confirmation" name="password_confirmation" />
       </div>
       <button>Rekisteröi käyttäjä</button>
     </form>

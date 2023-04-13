@@ -8,4 +8,8 @@ const createUser = async (payload: any): Promise<IUser | any> => {
   const result = await axios.post(BASEURL, payload);
   console.log(result);
 }
-export default {createUser};
+const getAll = async () => {
+  const result = await axios.get(BASEURL);
+  return result;
+}
+export default { createUser, getAll };

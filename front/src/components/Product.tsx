@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { IProductUI } from "../interfaces/IProduct";
+import { IProduct } from "../interfaces/IProduct";
 import ProductModal from "./Product.modal";
-const Product = ({ product }: { product: IProductUI }) => {
+const Product = ({ product }: { product: IProduct }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleModal = () => {
     setModalOpen(!modalOpen);
@@ -13,7 +13,6 @@ const Product = ({ product }: { product: IProductUI }) => {
         <div className="title">{product.title}</div>
         <div className="description">{product.description}</div>
         <div className="price">{product.price}</div>
-        <em>{product?.tags?.join(", ")}</em>
       </div>
     </>
   )
