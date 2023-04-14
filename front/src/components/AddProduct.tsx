@@ -18,11 +18,7 @@ const AddProduct = () => {
     return tags.split(",");
   }
   const handleSubmit = async (event: any) => {
-    const r = await ProductService.addProduct(product);
-    console.log(r);
-    const pr = await ProductService.getAll();
-    console.log(pr.data)
-  
+    const r = await ProductService.addProduct(product);  
   }
   return (
     <section id="add-product">
