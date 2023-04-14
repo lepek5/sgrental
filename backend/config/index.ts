@@ -1,5 +1,8 @@
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
+const SaltRounds = 10
+const Secret = process.env.SECRET || "lentaevaekalakukko";
 const isDevelopment = process.env.NODE_ENV === "development";
 const config = {
   express: {
@@ -15,6 +18,15 @@ const config = {
   },
   frontend: {
     host: process.env.FRONTEND_URI
+  },
+  utils: {
+    generateRandomPassword: async () => {
+      const salt = await bcrypt.genSalt(SaltRounds);
+      const firstRand = Math.floor((1+Math.random()) * 2000);
+      const secondRand = Math.floor((1+Math.random()) * 2000);
+      const secret = firstRand.toString() + secondRand.toString();
+      return await bcrypt.hash(secret, SaltRounds);
+    }
   }
 }
 export default config;

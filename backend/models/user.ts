@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize"
 import Database from "../database";
-class User extends Model {}
+class User extends Model {
+}
 User.init({
   id: {
     type: DataTypes.INTEGER,
