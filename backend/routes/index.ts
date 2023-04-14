@@ -1,4 +1,5 @@
 import express from "express";
+import { customerRouter } from "./customer.route";
 import ProductsRouter from "./products.route";
 import ReservationRoute from "./reservation.route";
 import { userRouter } from "./user.route";
@@ -6,4 +7,5 @@ const Api = express.Router();
 Api.use("/products", ProductsRouter);
 Api.use("/reservations", ReservationRoute);
 Api.use("/users", userRouter);
+Api.use("/customers", customerRouter);
 export default Api;

@@ -1,22 +1,41 @@
 import React, { useState } from 'react'
 import { ICustomer } from "../interfaces/ICustomer";
+import { IUser } from "../interfaces/IUser";
+import customerService from "../services/customer.service";
 import UserService from "../services/user.service";
+import UserSelector from "./UserSelector";
+import UsersList from "./UsersList";
 
 const AddCustomer = () => {
-  const [user, setUser] = useState<ICustomer>({
+  const [user, setUser] = useState<IUser>();
+  const [confirmed, setConfirmed] = useState(false);
+  const [customer, setCustomer] = useState<ICustomer>({
+    id: 0,
+    userId: 0,
     name: "",
     phone: "",
+    email: "",
     address: "",
-    date_of_birth: ""
+    dateOfBirth: ""
   });
+  const fetchUser = () => {
+    setUser(user);
+  }
   const handleInputChange = (event: any) => {
     const { id, value } = event.target;
-    setUser({ ...user, [id]: value });
+    setCustomer({ ...customer, [id]: value });
   }
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    const result = await UserService.createUser(user);
-    console.log(result)
+    //const result = await customerService.createCustomer(customer);
+    console.log("result")
+  }
+  const handleButtonClick = (e: any) => {
+    e.preventDefault();
+    setConfirmed(true);
+    if (confirmed && user) {
+      alert("Asiakassuhde on luotu!");
+    }
   }
   return (
     <form onSubmit={onSubmit}>
@@ -45,7 +64,10 @@ const AddCustomer = () => {
         <label htmlFor="name">Syntymäaika</label>
         <input onChange={handleInputChange} placeholder="" type="date" id="date_of_birth" name="date_of_birth" />
       </div>
-      <button>Rekisteröi käyttäjä</button>
+      { confirmed ? (<>
+      <UserSelector fetchUser={fetchUser} />
+      </>) : (<></>) }
+      <button type="button" onClick={handleButtonClick}>{confirmed ? "Rekisteröi käyttäjä" : "Jatka"}</button>
     </form>
   )
 }

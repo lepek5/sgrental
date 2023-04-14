@@ -1,31 +1,24 @@
-import Database from "../database";
-import sql from "../utils/sql";
-const TABLE = "customers";
+import Customer from "../models/customer";
 const customerService = {
   getAll: async () => {
-    var conn;
     try {
-      conn = await Database.getConnection();
-      const result = await conn.query(sql.getAllFromTable(TABLE));
-      return result;
+      const customers = await Customer.findAll();
+      return customers;
     } catch (err) {
       throw err;
     }
   },
   createCustomer: async (payload: any) => {
-    const { query, values } = sql.parseForInsert(TABLE, payload);
-    var conn;
     try {
-      conn = await sql.getConnection();
-      const result = await conn.query(query, values);
-      console.log("Query", result)
+      const customer = await Customer.create(payload);
+      return customer;
     } catch (err: unknown) {
       throw err;
     } finally {
-      if (conn) conn.release();
     }
   },
   getCustomerById: async () => {
 
   }
 }
+export default customerService;

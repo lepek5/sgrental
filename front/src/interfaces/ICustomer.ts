@@ -1,7 +1,9 @@
 export interface ICustomer {
-  customer_id?: number,
+  id: number,
+  userId: number,
   name: string,
+  email: string,
   address: string,
-  date_of_birth: string,
+  dateOfBirth: string,
   phone: string,
 }
