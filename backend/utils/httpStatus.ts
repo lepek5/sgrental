@@ -4,7 +4,8 @@ export enum httpStatus {
   UNAUTHORIZED = 401,
   FORBIDDEN = 403,
   NOT_FOUND = 404,
-  OK = 200,
+  SUCCESS = 200,
   CREATED = 201,
+  ACCEPTED = 202,
   CONFLICT = 409
 }

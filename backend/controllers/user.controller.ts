@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import config from "../config";
 import userService from "../services/user.service";
 import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
@@ -7,19 +8,29 @@ const userController = {
   login: async (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) throw new HtmlError(httpStatus.BAD_REQUEST,"Missing credentials");
     const { email, password } = req.body;
-    if (!email) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing email");
-    if (!password) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing password");
     try {
-      const result = await userService.login(email, password);
-      console.log("Login Result", result)
-      res.status(300).json(result);
+      const user = await userService.getByEmail(email);
+      if (user) {
+        const jsonUser = user.toJSON();
+        const login = await config.utils.comparePassword(password, jsonUser.password);
+        if (login) {
+          const token = await config.utils.createToken({id: jsonUser.id, email: jsonUser.email});
+          res.status(httpStatus.SUCCESS).json({
+            id: jsonUser.id,
+            email: jsonUser.email,
+            token
+          })
+          return;
+        }
+        throw new HtmlError(httpStatus.UNAUTHORIZED, "Wrong credentials");
+      }
+      throw new HtmlError(httpStatus.NOT_FOUND, "User not found");
     } catch (err) {
       next(err);
     }
   },
   createUser: async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
-    console.log("controlling..", body)
     try {
       const result = await userService.createUser(body);
       res.status(httpStatus.CREATED).json({"Account created": "ok"});
@@ -31,8 +42,7 @@ const userController = {
     console.log("Im awake at userController!");
     try {
       const result = await userService.getAll();
-      console.log("Controller result", result)
-      res.status(httpStatus.OK).json(result);
+      res.status(httpStatus.SUCCESS).json(result);
     } catch (err) {
       next(err);
     }
@@ -41,7 +51,7 @@ const userController = {
     const { id } = req.params;
     try {
       const result = await userService.getById(id);
-      res.status(httpStatus.OK).json(result);
+      res.status(httpStatus.SUCCESS).json(result);
     } catch (err) {
       next(err);
     }

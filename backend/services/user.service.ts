@@ -47,6 +47,18 @@ const userService = {
       throw err;
     }
   },
+  getByEmail: async (email: string) => {
+    try {
+      const result = await User.findOne({
+        where: {
+          email: email
+        }
+      });
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  },
   getById: async (id: string) => {
     try {
       const result = await User.findByPk(id);

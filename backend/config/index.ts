@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
@@ -34,6 +35,9 @@ const config = {
     },
     comparePassword: async (secret: string, hash: string) => {
       return await bcrypt.compare(secret, hash);
+    },
+    createToken: async (user: any) => {
+      return jwt.sign(user, Secret);
     }
   }
 }
