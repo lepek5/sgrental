@@ -1,8 +1,25 @@
 import Database from "../database";
 import User from "../models/user";
+import { httpStatus } from "../utils/httpStatus";
 import sql from "../utils/sql";
 const TABLE = "users";
 const userService = {
+  login: async (payload: any) => {
+    const { email, password } = payload;
+    try {
+      const user = await User.findOne({
+        where: {
+          email: email
+        }
+      });
+      if (!user) {
+        return { message: "User not found", status: httpStatus.NOT_FOUND }
+      }
+      console.log("user", user);
+    } catch (err) {
+      throw err;
+    }
+  },
   createUser: async (payload: any) => {
     try {
       console.log("start", payload)

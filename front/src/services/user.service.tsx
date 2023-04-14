@@ -1,5 +1,6 @@
 import axios from "axios";
 import Config from "../config";
+import { ILogin } from "../interfaces/ILogin";
 import { IUser } from "../interfaces/IUser";
 
 const BASEURL = Config.API.URI + "users";
@@ -20,4 +21,13 @@ const getById = async (id: string) => {
   const result = await axios.get(BASEURL + "/" +id);
   return result.data;
 }
-export default { createUser, getAll, getById };
+const login = async (credentials: any) => {
+  try {
+    const login = await axios.post(BASEURL+"/login", credentials);
+    console.log(login);
+    return login.data;
+  } catch (err) {
+    throw err;
+  }
+}
+export default { createUser, getAll, getById, login };

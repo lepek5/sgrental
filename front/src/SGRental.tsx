@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard.page";
 import Products from "./components/Products";
 import ReservationPage from "./pages/Reservations.page";
+import LoginPage from "./pages/Login.page";
 
 const SGRental = () => {
   return (
@@ -16,6 +17,7 @@ const SGRental = () => {
         <Router>
           <Header />
           <Routes>
+            <Route path="login" element={<LoginPage />} />
             <Route path="dash/*" element={<DashboardPage />} />
             <Route path="employee" element={<EmployeePage />} />
             <Route path="products/*" element={<Products />} />

@@ -7,7 +7,7 @@ const Navbar = () => {
       <nav>
         <ul id="nav-items">
           <li className="nav-item"><Link to="/products">Selaa tuotteita</Link></li>
-          <li className="nav-item">Luo tunnus</li>
+          <li className="nav-item"><Link to="/login">Kirjaudu sisään</Link></li>
           <li className="nav-item"><Link to="/dash">Dashboard</Link></li>
         </ul>
       </nav>

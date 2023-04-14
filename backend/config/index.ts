@@ -25,7 +25,15 @@ const config = {
       const firstRand = Math.floor((1+Math.random()) * 2000);
       const secondRand = Math.floor((1+Math.random()) * 2000);
       const secret = firstRand.toString() + secondRand.toString();
-      return await bcrypt.hash(secret, SaltRounds);
+      const hash = await bcrypt.hash(secret, salt);
+      return hash.substring(0,10);
+    },
+    hashPassword: async (secret: string) => {
+      const salt = await bcrypt.genSalt(SaltRounds);
+      return await bcrypt.hash(secret, salt);
+    },
+    comparePassword: async (secret: string, hash: string) => {
+      return await bcrypt.compare(secret, hash);
     }
   }
 }
