@@ -19,7 +19,9 @@ const customerService = {
       if (!user) {
         throw Error("Error creating new account");
       }
-      const result = await Customer.create({customer, userId: user.get("id")});
+      console.log(user.toJSON(), "uesr", customer);
+      const result = await Customer.create({...customer, userId: user.toJSON().id});
+      console.log(result,"paskaa housussa DDDDD")
       if (!result) throw Error("Error creating new customer account");
       return result;
     } catch (err) {

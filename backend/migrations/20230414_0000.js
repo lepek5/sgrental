@@ -47,7 +47,7 @@ module.exports = {
       phone: {
         type: DataTypes.STRING
       },
-      dateOfBirth: {
+      date_of_birth: {
         type: DataTypes.STRING
       }
     })
@@ -80,10 +80,10 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      startAt: {
+      start_at: {
         type: DataTypes.STRING
       },
-      endAt: {
+      end_at: {
         type: DataTypes.STRING
       },
       confirmed: {
