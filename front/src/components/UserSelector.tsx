@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { IUser } from "../interfaces/IUser";
 import userService from "../services/user.service";
 
-const UserSelector = ({fetchUser}:{fetchUser: any}) => {
+const UserSelector = ({ fetchUser }: { fetchUser: any }) => {
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
     const fetchUsers = async () => {

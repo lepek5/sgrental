@@ -1,6 +1,6 @@
 export interface ICustomer {
-  id: number,
-  userId: number,
+  id?: number,
+  userId?: number,
   name: string,
   email: string,
   address: string,

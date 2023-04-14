@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { ILogin } from "../interfaces/ILogin";
 import { IUser, IUserLogin } from "../interfaces/IUser";
 import UserService from "../services/user.service";
 
 const AddUser = () => {
-  const [user, setUser] = useState<IUserLogin>({
+  const [user, setUser] = useState<ILogin>({
     email: "",
     password: ""
   });
@@ -15,7 +16,7 @@ const AddUser = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const result = await UserService.createUser(user);
-    console.log(result)
+    console.log(typeof result)
   }
   return (
     <form onSubmit={onSubmit}>
