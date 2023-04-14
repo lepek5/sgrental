@@ -1,5 +1,5 @@
-# SGRental
-Sports Gear Rental
+# Sports Gear Rental
+_School project_
 
 - Express
 - React
