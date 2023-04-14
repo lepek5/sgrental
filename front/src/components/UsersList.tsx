@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import { IUser } from "../interfaces/IUser"
 const parseIsoDateToDate = (string: string) => {
   return new Date(string).toUTCString();
@@ -22,6 +23,7 @@ const UsersList = ({ users }: { users: IUser[] }) => {
           </tr>
           { }
           {users.map(user => (
+            <Link to={`../`+user.id.toString()}>
             <tr key={user.id}>
               {Object.entries(user).map(value => (
                 <td key={value.toString()}>{
@@ -30,6 +32,7 @@ const UsersList = ({ users }: { users: IUser[] }) => {
                     : getKeyValue(value).value}</td>
               ))}
             </tr>
+            </Link>
           ))}
         </tbody>
       </table>

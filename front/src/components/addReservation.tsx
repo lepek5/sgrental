@@ -1,6 +1,6 @@
 import React from 'react'
 import { IReservation } from "../interfaces/IReservation"
-import ReservationService from "../services/ReservationService"
+import ReservationService from "../services/reservation.service"
 
 const AddReservation = () => {
   var startDate = new Date();

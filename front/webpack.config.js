@@ -1,6 +1,7 @@
 const path = require('path');
+const dotenv = require("dotenv");
+const Dotenv = require("dotenv-webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
   mode: "development",
   entry: './src/index.tsx',
@@ -17,14 +18,20 @@ module.exports = {
       }
     ],
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: "public/index.html",
-    hash: true,
-    filename: "index.html"
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "public/index.html",
+      hash: true,
+      filename: "index.html"
+    }),
+    new Dotenv({
+      path: ".env"
+    })
+  ],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js']
   },
+  devtool: "source-map",
   devServer: {
     port: 4000,
     open: true,

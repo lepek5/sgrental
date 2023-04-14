@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { IProduct } from "../interfaces/IProduct";
-import ProductService from "../services/ProductService";
+import ProductService from "../services/product.service";
 const emptyProduct = {
   title: "",
   description: "",

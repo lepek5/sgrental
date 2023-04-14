@@ -1,7 +1,8 @@
 import axios from "axios";
+import Config from "../config";
 import { IProduct } from "../interfaces/IProduct";
 
-const BASEURL = "http://127.0.0.1:13331/api/products";
+const BASEURL = Config.API.URI + "products";
 
 const getAll = async (): Promise<IProduct | any> => {
   const result = await axios.get(BASEURL);

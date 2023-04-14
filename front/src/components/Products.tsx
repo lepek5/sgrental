@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IProduct } from "../interfaces/IProduct";
-import ProductService from "../services/ProductService";
+import ProductService from "../services/product.service";
 import Product from "./Product";
 import ProductModal from "./Product.modal";
 import ProductsNavbar from "./Products.Navbar";

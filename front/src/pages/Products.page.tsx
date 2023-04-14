@@ -4,7 +4,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "../components/AddProduct";
 import ProductList from "../components/ProductList";
 import { IProduct } from "../interfaces/IProduct";
-import ProductService from "../services/ProductService";
+import ProductService from "../services/product.service";
 
 const Products = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -16,19 +16,19 @@ const Products = () => {
     getProductData();
   }, []);
   return (
-    <section id="products">
+    <main id="products">
       <nav className="sub-nav">
         <Link to="add">Lisää tuote </Link>
         <Link to="list">Selaa tuotteita</Link>
         <Link to="list">Etsi tuotteita</Link>
       </nav>
-      <main>
+      <section id="content">
         <Routes>
           <Route path="add" element={<AddProduct />} />
           <Route path="list" element={<ProductList products={products} />} />
         </Routes>
-      </main>
-    </section>
+      </section>
+    </main>
   )
 }
 export default Products;

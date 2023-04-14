@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ICustomer } from "../interfaces/ICustomer";
-import UserService from "../services/UserService";
+import UserService from "../services/user.service";
 
 const AddCustomer = () => {
   const [user, setUser] = useState<ICustomer>({

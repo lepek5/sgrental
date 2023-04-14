@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IUser, IUserLogin } from "../interfaces/IUser";
-import UserService from "../services/UserService";
+import UserService from "../services/user.service";
 
 const AddUser = () => {
   const [user, setUser] = useState<IUserLogin>({
