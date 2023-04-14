@@ -22,6 +22,14 @@ const userService = {
     } catch (err) {
       throw err;
     }
+  },
+  getById: async (id: string) => {
+    try {
+      const result = await User.findByPk(id);
+      return result;
+    } catch (err) {
+      throw err;
+    }
   }
 };
 export default userService;

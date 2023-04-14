@@ -20,6 +20,15 @@ const userController = {
     } catch (err) {
       next(err);
     }
+  },
+  getById: async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      const result = await userService.getById(id);
+      res.status(httpStatus.OK).json(result);
+    } catch (err) {
+      next(err);
+    }
   }
 }
 export default userController;
