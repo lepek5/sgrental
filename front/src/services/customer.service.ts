@@ -16,7 +16,6 @@ const customerService = {
   createCustomer: async (payload: ICustomer) => {
     try {
       const result = await axios.post(BaseUrl, payload);
-      console.log("CREATING CUSTOMER FFS!!!", result);
       return result.data;
     } catch (err) {
       throw err

@@ -169,3 +169,14 @@ a, a:hover, a:visited, a:active {
   display: flex;
   gap: 0.2rem;
 }
+#notification {
+  border: 2px double var(--must-blue);
+  padding: 0.4rem;
+  z-index: 5;
+  transition: all 500ms linear;
+  color: var(--must-blue);
+  visibility: hidden;
+}
+.active {
+  animation: fadeIn 300ms linear;
+}

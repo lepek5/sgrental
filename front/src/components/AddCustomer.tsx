@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { CSSProperties, useState } from 'react'
 import { ICustomer } from "../interfaces/ICustomer";
-import { IUser } from "../interfaces/IUser";
 import customerService from "../services/customer.service";
-import UserService from "../services/user.service";
-import UserSelector from "./UserSelector";
-import UsersList from "./UsersList";
 
 const AddCustomer = () => {
+  const [notification, setNotification] = useState("");
   const [customer, setCustomer] = useState<ICustomer>({
     name: "",
     phone: "",
@@ -14,6 +11,9 @@ const AddCustomer = () => {
     address: "",
     dateOfBirth: ""
   });
+  const notificationStyle = {
+    visibility: notification.length > 0 ? "visible" : "hidden"
+  } as CSSProperties;
   const handleInputChange = (event: any) => {
     const { id, value } = event.target;
     setCustomer({ ...customer, [id]: value });
@@ -21,11 +21,15 @@ const AddCustomer = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const result = await customerService.createCustomer(customer);
-    console.log("New customer",result);
-    console.log(result.name);
+    console.log(result.data)
+    setNotification(`Käyttäjätunnus luotu sähköpostilla ${result.data.email} ja salasanalla ${result.data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
+    setTimeout(() => {
+      setNotification("");
+    },5000);
   }
   return (
     <form onSubmit={onSubmit}>
+      <div style={notificationStyle} className={notification.length > 0 ? "active" : ""} id="notification">{notification}</div>
       <h2>Rekisteröi käyttäjä</h2>
       <div className="form-item">
         <label htmlFor="name">Nimi</label>

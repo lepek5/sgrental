@@ -1,8 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 import userService from "../services/user.service";
+import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
 
 const userController = {
+  login: async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body) throw new HtmlError(httpStatus.BAD_REQUEST,"Missing credentials");
+    const { email, password } = req.body;
+    if (!email) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing email");
+    if (!password) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing password");
+    try {
+      const result = await userService.login(email, password);
+      console.log("Login Result", result)
+      res.status(300).json(result);
+    } catch (err) {
+      next(err);
+    }
+  },
   createUser: async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
     console.log("controlling..", body)

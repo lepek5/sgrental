@@ -1,11 +1,12 @@
+import config from "../config";
 import Database from "../database";
 import User from "../models/user";
+import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
 import sql from "../utils/sql";
 const TABLE = "users";
 const userService = {
-  login: async (payload: any) => {
-    const { email, password } = payload;
+  login: async (email: string, password: string) => {
     try {
       const user = await User.findOne({
         where: {
@@ -13,9 +14,13 @@ const userService = {
         }
       });
       if (!user) {
-        return { message: "User not found", status: httpStatus.NOT_FOUND }
+        throw new HtmlError(httpStatus.NOT_FOUND, "User not found");
       }
-      console.log("user", user);
+      const login = await config.utils.comparePassword(password, user.toJSON().password);
+      if (!login) {
+        throw new HtmlError(httpStatus.UNAUTHORIZED, "Invalid credentials on login")
+      }
+      return user;
     } catch (err) {
       throw err;
     }
