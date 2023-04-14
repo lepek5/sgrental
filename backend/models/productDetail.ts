@@ -1,26 +1,23 @@
 import { Model, DataTypes } from "sequelize"
 import Database from "../database";
-class Product extends Model {}
-Product.init({
+class ProductDetail extends Model {}
+ProductDetail.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  title: {
-    type: DataTypes.STRING
+  productId: {
+    type: DataTypes.INTEGER
   },
-  description: {
-    type: DataTypes.STRING
-  },
-  price: {
-    type: DataTypes.BIGINT
+  categoryId: {
+    type: DataTypes.INTEGER
   }
 },{
   sequelize: Database.sequelize,
   underscored: true,
   timestamps: false,
-  modelName: "product"
+  modelName: "productDetail"
 });
 
-export default Product;
+export default ProductDetail;

@@ -5,6 +5,7 @@ import { httpStatus } from "../utils/httpStatus";
 const userController = {
   createUser: async (req: Request, res: Response, next: NextFunction) => {
     const { body } = req;
+    console.log("controlling..", body)
     try {
       const result = await userService.createUser(body);
       res.status(httpStatus.CREATED).json({"Account created": "ok"});

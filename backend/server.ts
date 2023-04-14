@@ -17,9 +17,10 @@ server.use("/api", Api);
 
 server.use(errorHandler);
 
-const startServer = () => {
+const startServer = async () => {
   try {
-    Database.connect();
+    await Database.connect();
+    await Database.runMigrate();
     server.listen(config.express.port, config.express.host, () => {
       console.log(`Express is running at ${config.express.host}:${config.express.port}`)
     });

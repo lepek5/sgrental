@@ -1,32 +1,38 @@
 import { Model, DataTypes } from "sequelize"
 import Database from "../database";
-class Customer extends Model {}
-Customer.init({
+class Reservation extends Model {}
+Reservation.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  userId: {
+  productId: {
     type: DataTypes.INTEGER
   },
-  name: {
+  customerId: {
+    type: DataTypes.INTEGER
+  },
+  employeeId: {
+    type: DataTypes.INTEGER
+  },
+  startAt: {
     type: DataTypes.STRING
   },
-  address: {
+  endAt: {
     type: DataTypes.STRING
   },
-  phone: {
-    type: DataTypes.STRING
+  confirmed: {
+    type: DataTypes.BOOLEAN
   },
-  dateOfBirth: {
-    type: DataTypes.STRING
+  completed: {
+    type: DataTypes.BOOLEAN
   }
 },{
   sequelize: Database.sequelize,
   underscored: true,
   timestamps: false,
-  modelName: "customer"
+  modelName: "reservation"
 });
 
-export default Customer;
+export default Reservation;
