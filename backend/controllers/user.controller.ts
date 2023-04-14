@@ -13,6 +13,7 @@ const userController = {
     }
   },
   getAll: async (req: Request, res: Response, next: NextFunction) => {
+    console.log("Im awake at userController!");
     try {
       const result = await userService.getAll();
       console.log("Controller result", result)

@@ -5,12 +5,14 @@ import Api from "./routes";
 import errorHandler from "./middleware/errorHandling";
 import Database from "./database";
 const server = express();
-
-server.use(cors({
-  origin: "http://localhost:4000"
-}));
+const origins = ["http://192.168.0.4:9000", "http://localhost:9000", "http://127.0.0.1:9000"]
+const corsOpts = {
+  origin: config.frontend.host
+}
+console.log("Origin", config.frontend.host);
 server.use(express.json());
 
+server.use(cors());
 server.use("/api", Api);
 
 server.use(errorHandler);

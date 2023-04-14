@@ -12,6 +12,9 @@ const config = {
     user: isDevelopment ? process.env.DB_USER_LOCAL : process.env.DB_USER_REMOTE,
     database: isDevelopment ? process.env.DB_DATABASE_LOCAL : process.env.DB_DATABASE_REMOTE,
     password: isDevelopment ? process.env.DB_PW_LOCAL : process.env.EXPRESS_PORT_REMOTE
+  },
+  frontend: {
+    host: process.env.FRONTEND_URI
   }
 }
 export default config;

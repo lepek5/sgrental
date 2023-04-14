@@ -1,7 +1,7 @@
 FROM node:alpine
 WORKDIR /usr/src/app
 COPY ./package*.json ./
+COPY ./ ./
 RUN npm install 
-COPY . ./
-EXPOSE 4000
+EXPOSE 9000
 CMD npm run dev

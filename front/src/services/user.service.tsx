@@ -10,8 +10,10 @@ const createUser = async (payload: any): Promise<IUser | any> => {
   return result.data;
 }
 const getAll = async () => {
-  console.log("url", BASEURL)
+  console.log("BASE_URI", BASEURL)
+  
   const result = await axios.get(BASEURL);
+  console.log("Result", result);
   return result.data;
 }
 const getById = async (id: string) => {
