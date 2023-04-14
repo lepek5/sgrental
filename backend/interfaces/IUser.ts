@@ -5,3 +5,6 @@ export interface IUser {
 export interface IUserLogin extends IUser {
   password: string
 }
+export interface IUserVerified extends IUser {
+  iat: number
+}

@@ -6,7 +6,7 @@ import { httpStatus } from "../utils/httpStatus";
 
 const userController = {
   login: async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.body) throw new HtmlError(httpStatus.BAD_REQUEST,"Missing credentials");
+    if (!req.body) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing credentials");
     const { email, password } = req.body;
     try {
       const user = await userService.getByEmail(email);
@@ -14,7 +14,8 @@ const userController = {
         const jsonUser = user.toJSON();
         const login = await config.utils.comparePassword(password, jsonUser.password);
         if (login) {
-          const token = await config.utils.createToken({id: jsonUser.id, email: jsonUser.email});
+          const token = config.utils.createToken({ id: jsonUser.id, email: jsonUser.email });
+          res.cookie("token", token, { httpOnly: true });
           res.status(httpStatus.SUCCESS).json({
             id: jsonUser.id,
             email: jsonUser.email,
@@ -33,7 +34,7 @@ const userController = {
     const { body } = req;
     try {
       const result = await userService.createUser(body);
-      res.status(httpStatus.CREATED).json({"Account created": "ok"});
+      res.status(httpStatus.CREATED).json({ "Account created": "ok" });
     } catch (err) {
       next(err);
     }

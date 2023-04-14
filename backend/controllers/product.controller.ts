@@ -4,11 +4,12 @@ import { Request, Response } from "express";
 import { httpStatus } from "../utils/httpStatus";
 
 const ProductController = {
-  getAll: async (_req: Request, res: Response) => {
+  getAll: async (req: Request, res: Response) => {
+    console.log("lol", req.headers);
     try {
       const result = await ProductService.getAll();
       console.log("Controller result", result);
-      res.status(httpStatus.OK).json(result);
+      res.status(httpStatus.SUCCESS).json(result);
     } catch (err) {
       throw err;
     }

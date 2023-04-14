@@ -36,8 +36,11 @@ const config = {
     comparePassword: async (secret: string, hash: string) => {
       return await bcrypt.compare(secret, hash);
     },
-    createToken: async (user: any) => {
+    createToken: (user: any) => {
       return jwt.sign(user, Secret);
+    },
+    verifyToken: (token: string) => {
+      return jwt.verify(token, Secret);
     }
   }
 }
