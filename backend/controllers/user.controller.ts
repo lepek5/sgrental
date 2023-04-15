@@ -40,9 +40,11 @@ const userController = {
     }
   },
   getAll: async (req: Request, res: Response, next: NextFunction) => {
-    console.log("Im awake at userController!");
     try {
       const result = await userService.getAll();
+      if (!result) {
+        throw new HtmlError(httpStatus.NOT_FOUND, "Failed to get users");
+      }
       res.status(httpStatus.SUCCESS).json(result);
     } catch (err) {
       next(err);

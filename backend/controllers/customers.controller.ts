@@ -10,6 +10,7 @@ const customerController = {
   getAll: async (req: Request, res: Response, next: NextFunction)=> {
     try {
       const result = await customerService.getAll();
+      if (!result) throw new HtmlError(httpStatus.NOT_FOUND, "Error fetching customers");
       res.status(result.status).json(result);
     } catch (err) {
       next(err);
