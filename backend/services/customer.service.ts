@@ -7,10 +7,7 @@ const customerService = {
   getAll: async () => {
     try {
       const customers = await Customer.findAll();
-      return {
-        data: customers,
-        status: httpStatus.OK
-      }
+      return customers;
     } catch (err) {
       throw err;
     }
