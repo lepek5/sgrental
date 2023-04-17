@@ -7,7 +7,7 @@ const ProductList = ({ products }: { products: IProduct[] }) => {
   const keys = Object.keys(products[0]);
   return (
     <div id="product-list">
-      <h3>Käyttäjälista</h3>
+      <h3>Tuotelista</h3>
       <table id="users">
         <tbody>
           <tr>
@@ -20,9 +20,8 @@ const ProductList = ({ products }: { products: IProduct[] }) => {
                 const { key, value } = Helpers.parse.fromEntry(entry);
                 return (
                   <td key={value.toString()}>{
-                    key === "createdAt" || key === "updatedAt"
-                      ? Helpers.parse.datetimeToDate(value)
-                      : value}</td>
+                    key !== "categories" ? value : value.join(", ")
+                  }</td>
                 )
               })}
             </tr>
