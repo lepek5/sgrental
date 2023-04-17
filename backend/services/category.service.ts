@@ -1,9 +1,23 @@
-import sql from "../utils/sql";
+import Category from "../models/category";
 
-const BASEURL = "http://localhost:13331/api/"
-const TABLE = "categories";
-const ApiUrl = BASEURL + TABLE;
-const categoryService = {
-  getAll: async () => {}
-}
-export default categoryService;
+const createCategory = async (cat: any ) => {
+  try {
+    const result = await Category.findOne({
+      where: {
+        category: cat
+      },
+      attributes: ["id", "category"]
+    });
+    if (result === null) {
+      const newCat = await Category.create({
+        category: cat
+      });
+      return newCat.toJSON();
+    }
+    return result.toJSON();
+  } catch (err) {
+    throw err;
+  }
+};
+const getAll = async () => {}
+export default { createCategory, getAll};

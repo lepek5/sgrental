@@ -1,5 +1,7 @@
 import { Model, DataTypes } from "sequelize"
 import Database from "../database";
+import ProductDetail from "./productDetail";
+import Product from "./product";
 class Category extends Model {}
 Category.init({
   id: {
@@ -16,5 +18,4 @@ Category.init({
   timestamps: false,
   modelName: "category"
 });
-
 export default Category;

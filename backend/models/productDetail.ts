@@ -8,10 +8,18 @@ ProductDetail.init({
     autoIncrement: true
   },
   productId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    references: {
+      model: "products",
+      key: "id"
+    }
   },
   categoryId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    references: {
+      model: "categories",
+      key: "id"
+    }
   }
 },{
   sequelize: Database.sequelize,

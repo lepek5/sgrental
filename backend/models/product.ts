@@ -1,5 +1,7 @@
 import { Model, DataTypes } from "sequelize"
 import Database from "../database";
+import Category from "./category";
+import ProductDetail from "./productDetail";
 class Product extends Model {}
 Product.init({
   id: {
