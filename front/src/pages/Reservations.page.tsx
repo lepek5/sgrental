@@ -4,6 +4,7 @@ import ReservationsList from "../components/Reservations.list";
 import { IReservation } from "../interfaces/IReservation";
 import ReservationService from "../services/reservation.service";
 import AddReservation from "../components/addReservation";
+import Reservations from "../components/Reservations";
 
 const ReservationPage = () => {
   const [reservations, setReservations] = useState<IReservation[]>([]);
@@ -22,6 +23,7 @@ const ReservationPage = () => {
       </nav>
       <section id="content">
         <Routes>
+          <Route path="/" element={<Reservations />} />
           <Route path="list" element={
             <ReservationsList reservations={reservations} />} />
           <Route path="add" element={<AddReservation />} />

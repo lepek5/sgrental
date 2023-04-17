@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ILogin } from "../interfaces/ILogin";
 import userService from "../services/user.service";
+import Helpers from "../utils/helpers";
 
 const Login = () => {
   const [credentials, setCredentials] = useState<ILogin>({
@@ -15,6 +16,9 @@ const Login = () => {
     event.preventDefault();
     try {
       const result = await userService.login(credentials);
+      if (result.token) {
+        Helpers.storage.set("token", result.token);
+      }
       return result;
     } catch (err) {
       console.error(err);
@@ -22,6 +26,7 @@ const Login = () => {
   };
   return (
     <form id="user-login" onSubmit={onSubmit}>
+      <h3>Kirjaudu sisään</h3>
       <div className="form-item">
         <label htmlFor="name">Sähköposti</label>
         <input onChange={handleInputChange} placeholder="" type="text" id="email" name="email" />

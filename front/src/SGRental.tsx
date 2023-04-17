@@ -25,6 +25,7 @@ const SGRental = () => {
           </Routes>
         </Router>
       <Footer />
+      <div id="modal"></div>
     </>
   )
 };

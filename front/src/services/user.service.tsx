@@ -4,6 +4,7 @@ import { ILogin } from "../interfaces/ILogin";
 import { IUser } from "../interfaces/IUser";
 
 const BASEURL = Config.API.URI + "users";
+axios.defaults.withCredentials = true;
 
 const createUser = async (payload: any): Promise<IUser | any> => {
   

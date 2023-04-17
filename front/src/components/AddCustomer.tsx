@@ -12,7 +12,8 @@ const AddCustomer = () => {
     dateOfBirth: ""
   });
   const notificationStyle = {
-    visibility: notification.length > 0 ? "visible" : "hidden"
+    visibility: notification.length > 0 ? "visible" : "hidden",
+    transform: notification.length > 0 ? "scale(1)" : "scale(0)"
   } as CSSProperties;
   const handleInputChange = (event: any) => {
     const { id, value } = event.target;
@@ -29,7 +30,7 @@ const AddCustomer = () => {
   }
   return (
     <form onSubmit={onSubmit}>
-      <div style={notificationStyle} className={notification.length > 0 ? "active" : ""} id="notification">{notification}</div>
+      <div style={notificationStyle} className={notification.length > 1 ? "modal" : ""} id="notification">{notification}</div>
       <h2>Rekisteröi käyttäjä</h2>
       <div className="form-item">
         <label htmlFor="name">Nimi</label>

@@ -14,12 +14,10 @@ const DashboardPage = () => {
     <>
       <DashboardNavbar />
       <Routes>
-      <Route path="test" element={<Test />}  />
-      <Route path="add-product" element={<AddProduct />} />
-      <Route path="products/*" element={<ProductsPage />} />
-      <Route path="reservations/*" element={<ReservationPage />} />
-      <Route path="customers/*" element={<CustomersPage />} />
-      <Route path="users/*" element={<UsersPage />} />
+        <Route path="add-product" element={<AddProduct />} />
+        <Route path="products/*" element={<ProductsPage />} />
+        <Route path="reservations/*" element={<ReservationPage />} />
+        <Route path="customers/*" element={<CustomersPage />} />
       </Routes>
     </>
   )

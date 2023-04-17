@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Link, Route, Routes } from "react-router-dom"
 import AddCustomer from "../components/AddCustomer";
 import CustomerList from "../components/Customer.list";
+import Customers from "../components/Customers";
 import customerService from "../services/customer.service";
 const CustomersPage = () => {
   const [customers, setCustomers] = useState();
   useEffect(() => {
     const fetchUsers = async () => {
       const result = await customerService.getAll();
+      setCustomers(result);
     }
     fetchUsers();
   }, []);
@@ -19,6 +21,7 @@ const CustomersPage = () => {
       </nav>
       <section id="content">
         <Routes>
+          <Route path="/" element={<Customers />} />
           <Route path="add" element={<AddCustomer />} />
           <Route path="list" element={<CustomerList customers={customers} />} />
         </Routes>

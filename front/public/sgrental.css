@@ -1,3 +1,20 @@
+@media screen and (min-width: 691px) {
+  :root {
+    --header1-size: 1.5rem;
+    --main-hamburger-display: "none";
+    --main-hamburger-visibility: "hidden";
+    --hamburger-color: #f33;
+    
+  }
+}
+@media screen and (max-width: 690px) {
+  :root {
+    --header1-size: 1rem;
+    --main-hamburger-display: "block";
+    --main-hamburger-visibility: "visible";
+    --hamburger-color: #a88;
+  } 
+}
 :root {
   --must-blue: #00559F;
   --bright-blue: #1f90bb;
@@ -21,6 +38,9 @@ html {
   background-color: var(--bluewhite);
   font-family: var(--font-montressant);
 }
+h1 {
+  font-size: var(--header1-size);
+}
 footer {
   width: 100%;
   position: sticky;
@@ -28,6 +48,13 @@ footer {
 body {
   min-height: 100%;
   background-color: var(--white);
+}
+main {
+  position: absolute;
+  margin-bottom: 5rem;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 }
 footer {
   width: 100%;
@@ -49,6 +76,7 @@ header {
   position: sticky;
   top: 0;
   background-color: var(--white);
+  background: linear-gradient(180deg, var(--white) 95%, var(--bright-green-blue));
 }
 #content {
   min-height: 100%;
@@ -101,12 +129,6 @@ header {
   flex-wrap: wrap;
   gap: 1rem;
 }
-#page-content {
-  margin-top: var(--header-height);
-  margin-bottom: var(--footer-height);
-  min-height: 100%;
-}
-
 #dashboard-nav {
   display:flex;
   justify-content: space-between;
@@ -128,6 +150,7 @@ header {
 }
 .dashboard-nav .nav-link {
   padding: 0.5rem 0.2rem;
+  border-radius: 0.2rem;
   /* background: linear-gradient(45deg, var(--greenwhite),rgba(244,252,255, 0.2)); */
   align-content: center;
   color: var(--bluewhite);
@@ -138,11 +161,6 @@ header {
   background-color: var(--white);
   color: var(--must-blue);
 }
-#add-product {
-  width: 100%;
-
-}
-
 .modal {
   border-radius: 0.5rem;
   position: fixed;
@@ -151,11 +169,13 @@ header {
   top: calc(var(--header-height) + var(--navigator-height) + 1rem);
   margin-left: 10vw;
   transition: all 500ms linear;
-  box-shadow: 0 0 15px var(--bluewhite);
-  background-color: white;
+  box-shadow: 0 0 15px rgba(var(--bluewhite), 0.5);
+  background-color: rgb(177, 11, 11);
   background: linear-gradient(72deg, var(--bluegreen), var(--white));
   width: 80vw;
   height: 50vh;
+  visibility: visible;
+  display: block;
 }
 a, a:hover, a:visited, a:active {
   text-decoration: none;
@@ -177,6 +197,33 @@ a, a:hover, a:visited, a:active {
   color: var(--must-blue);
   visibility: hidden;
 }
-.active {
-  animation: fadeIn 300ms linear;
+
+.link-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.link-button {
+  padding: 0.5rem;
+  box-shadow: 0 0 2px 0 var(--bright-green-blue);
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 2px solid var(--bright-blue);
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+#modal .modal-content {
+  padding: 1rem;
+}
+
+.hamburger {
+  display: var(--main-hamburger-display);
+  background-color: var(--hamburger-color);
 }

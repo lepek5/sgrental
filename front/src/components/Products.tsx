@@ -44,7 +44,6 @@ const Products = () => {
     setFilters(filter);
   }
   if (!products) return <h3>FUCK YOU! NOT PRODUCTS FOR YOU!</h3>
-  if (products.length < 1) return (<><p>Loading...</p></>);
   return (
     <>
       <section id="products">
