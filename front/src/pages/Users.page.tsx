@@ -16,6 +16,7 @@ const UsersPage = () => {
   }, []);
   return (
     <main id="users">
+      <h2>Käyttäjät</h2>
       <nav className="sub-nav">
         <Link to="add">Lisää käyttäjä </Link>
         <Link to="list">Selaa käyttäjiä</Link>

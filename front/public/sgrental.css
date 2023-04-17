@@ -16,7 +16,8 @@
   } 
 }
 :root {
-  --must-blue: #00559F;
+  --must-blue: rgb(0, 85, 159);
+  --must-blue-alpha-5: rgba(0, 85, 159, 0.1);
   --bright-blue: #1f90bb;
   --bright-green-blue: #23a1d1;
   --bluewhite: #effeff;
@@ -40,6 +41,17 @@ html {
 }
 h1 {
   font-size: var(--header1-size);
+}
+h2 {
+  background-color: var(--must-blue-alpha-5);
+  padding: 0.1rem 1rem;
+  color: var(--must-blue);
+  z-index: 6;
+  border-bottom: 2px dotted var(--bright-blue);
+}
+h3 {
+  color: var(--must-blue);
+  padding-bottom: 1rem;
 }
 footer {
   width: 100%;
@@ -124,11 +136,6 @@ header {
     opacity: 1;
   }
 }
-#products {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
 #dashboard-nav {
   display:flex;
   justify-content: space-between;
@@ -183,11 +190,11 @@ a, a:hover, a:visited, a:active {
 }
 .sub-nav {
   width: 100%;
-  color: var(--white);
-  background-color: var(--must-blue);
+  color: var(--must-blue);
   padding: 0.2rem 0.5rem;
   display: flex;
-  gap: 0.2rem;
+  gap: 0.4rem;
+  border-bottom: 1px dashed var(--bright-blue);
 }
 #notification {
   border: 2px double var(--must-blue);
@@ -202,9 +209,11 @@ a, a:hover, a:visited, a:active {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
 }
 
 .link-button {
+  width: 100%;
   padding: 0.5rem;
   box-shadow: 0 0 2px 0 var(--bright-green-blue);
 }
@@ -226,4 +235,11 @@ a, a:hover, a:visited, a:active {
 .hamburger {
   display: var(--main-hamburger-display);
   background-color: var(--hamburger-color);
+}
+.form-item {
+  padding: 0 0 0.2rem 0.5rem;
+}
+.form-item label {
+  min-width: 10rem;
+  display: inline-block;
 }

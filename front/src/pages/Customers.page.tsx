@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, Route, Routes } from "react-router-dom"
 import AddCustomer from "../components/AddCustomer";
 import CustomerList from "../components/Customer.list";
-import Customers from "../components/Customers";
+import Customers from "../components/Customers.dash";
 import customerService from "../services/customer.service";
 const CustomersPage = () => {
   const [customers, setCustomers] = useState();
@@ -15,9 +15,10 @@ const CustomersPage = () => {
   }, []);
   return (
     <main id="customers">
+      <h2>Asiakkaat</h2>
       <nav className="sub-nav">
-        <Link to="add">Lisää asiakas</Link>
-        <Link to="list">Selaa asiakkaita</Link>
+        <Link to="add">Lisää</Link>
+        <Link to="list">Selaa</Link>
       </nav>
       <section id="content">
         <Routes>

@@ -4,7 +4,7 @@ import ReservationsList from "../components/Reservations.list";
 import { IReservation } from "../interfaces/IReservation";
 import ReservationService from "../services/reservation.service";
 import AddReservation from "../components/addReservation";
-import Reservations from "../components/Reservations";
+import ReservationsDash from "../components/Reservations.dash";
 
 const ReservationPage = () => {
   const [reservations, setReservations] = useState<IReservation[]>([]);
@@ -17,13 +17,14 @@ const ReservationPage = () => {
   }, []);
   return (
     <main id="reservations">
+      <h2>Varaukset</h2>
       <nav className="sub-nav">
-        <Link to="list">Selaa varauksia</Link>
-        <Link to="add">Lisää varaus</Link>
+        <Link to="add">Lisää</Link>
+        <Link to="list">Selaa</Link>
       </nav>
       <section id="content">
         <Routes>
-          <Route path="/" element={<Reservations />} />
+          <Route path="/" element={<ReservationsDash />} />
           <Route path="list" element={
             <ReservationsList reservations={reservations} />} />
           <Route path="add" element={<AddReservation />} />
