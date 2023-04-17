@@ -1,31 +1,21 @@
-import axios from "axios";
-import Config from "../config";
 import { ILogin } from "../interfaces/ILogin";
 import { IUser } from "../interfaces/IUser";
-
-const BASEURL = Config.API.URI + "users";
-axios.defaults.withCredentials = true;
-
+import apiService from "./api.service";
 const createUser = async (payload: any): Promise<IUser | any> => {
-  
-  const result = await axios.post(BASEURL, payload);
+  const result = await apiService.post("users", payload);
   return result.data;
 }
 const getAll = async () => {
-  console.log("BASE_URI", BASEURL)
-  
-  const result = await axios.get(BASEURL);
-  console.log("Result", result);
+  const result = await apiService.get("users");
   return result.data;
 }
 const getById = async (id: string) => {
-  const result = await axios.get(BASEURL + "/" +id);
+  const result = await apiService.get("users/" + id );
   return result.data;
 }
-const login = async (credentials: any) => {
+const login = async (credentials: ILogin) => {
   try {
-    const login = await axios.post(BASEURL+"/login", credentials);
-    console.log(login);
+    const login = await apiService.post("users/login", credentials);
     return login.data;
   } catch (err) {
     throw err;

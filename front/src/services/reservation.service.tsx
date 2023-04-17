@@ -1,15 +1,11 @@
-import axios from "axios"
-import Config from "../config";
 import { IReservation } from "../interfaces/IReservation";
-
-const BASEURL = Config.API.URI + "reservations";
-
+import apiService from "./api.service";
 const getAll = async (): Promise<IReservation[] | any> => {
-  const res = await axios.get(BASEURL);
+  const res = await apiService.get("reservations");
   return res.data;
 }
 const createReservation = async (payload: IReservation) => {
-  const res = await axios.post(BASEURL, payload);
+  const res = await apiService.post("customers", payload);
   return res.data;
 }
 export default { getAll, createReservation };
