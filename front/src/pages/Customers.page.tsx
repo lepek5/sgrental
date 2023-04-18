@@ -3,16 +3,18 @@ import { Link, Route, Routes } from "react-router-dom"
 import AddCustomer from "../components/AddCustomer";
 import CustomerList from "../components/Customer.list";
 import Customers from "../components/Customers.dash";
+import getCustomers from "../queries/customer";
+import { useQuery, useQueryClient } from "react-query";
 import customerService from "../services/customer.service";
 const CustomersPage = () => {
-  const [customers, setCustomers] = useState();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await customerService.getAll();
-      setCustomers(result);
-    }
-    fetchUsers();
-  }, []);
+  const queryClient = useQueryClient();
+  const { data: customers, isLoading} = useQuery("customers", async () => {
+    return await customerService.getAll()
+  },{
+    onSuccess() {
+      queryClient.invalidateQueries("customers");
+    },
+  });
   return (
     <main id="customers">
       <h2>Asiakkaat</h2>
