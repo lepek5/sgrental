@@ -6,16 +6,15 @@ import ProductList from "../components/ProductList";
 import { IProduct } from "../interfaces/IProduct";
 import ProductService from "../services/product.service";
 import ProductsDash from "../components/Products.dash";
+import { useQuery } from "react-query";
+import productService from "../services/product.service";
 
 const Products = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  useEffect(() => {
-    const getProductData = async () => {
-      const request = await ProductService.getAll();
-      setProducts(request);
-    };
-    getProductData();
-  }, []);
+  const { data: products, isLoading } = useQuery(
+    'products',
+    async () => await productService.getAll()
+  );
+  if (isLoading) return (<em>Lataan tuotteita..</em>);
   return (
     <main id="products">
       <h2>Tuotteet</h2>
@@ -26,7 +25,7 @@ const Products = () => {
       </nav>
       <section id="content">
         <Routes>
-          <Route path="/" element={<ProductsDash /> } />
+          <Route path="/" element={<ProductsDash />} />
           <Route path="add" element={<AddProduct />} />
           <Route path="list" element={<ProductList products={products} />} />
         </Routes>

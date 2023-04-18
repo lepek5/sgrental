@@ -4,15 +4,13 @@ import AddCustomer from "../components/AddCustomer";
 import CustomerList from "../components/Customer.list";
 import Customers from "../components/Customers.dash";
 import customerService from "../services/customer.service";
+import { useQuery } from "react-query";
 const CustomersPage = () => {
-  const [customers, setCustomers] = useState();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await customerService.getAll();
-      setCustomers(result);
-    }
-    fetchUsers();
-  }, []);
+  const { data: customers, isLoading} = useQuery(
+    "customers",
+    async () => await customerService.getAll()
+  );
+  if (isLoading) return (<em>Lataan asiakkaita..</em>)
   return (
     <main id="customers">
       <h2>Asiakkaat</h2>
