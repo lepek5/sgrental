@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Route, Routes, useParams } from "react-router-dom";
-import { IUser } from "../interfaces/IUser"
 import UserService from "../services/user.service";
-import ReservationsDash from "../components/Reservations.dash";
-import ReservationsList from "../components/Reservations.list";
 import AddReservation from "../components/addReservation";
 import UserDetailsDash from "../components/UserDetails.dash";
 import UserDetails from "../components/UserDetails";

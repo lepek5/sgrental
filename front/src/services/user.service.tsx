@@ -16,6 +16,7 @@ const getById = async (id: string) => {
 const login = async (credentials: ILogin) => {
   try {
     const login = await apiService.post("users/login", credentials);
+    console.log("login-object", login)
     return login.data;
   } catch (err) {
     throw err;

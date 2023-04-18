@@ -18,7 +18,7 @@ const DashboardPage = () => {
         <Route path="reservations/*" element={<ReservationPage />} />
         <Route path="customers/*" element={<CustomersPage />} />
         <Route path="employees/*" element={<EmployeePage />} />
-        <Route path="user/:id" element={<UserDetailsPage />} />
+        <Route path="user/:id/*" element={<UserDetailsPage />} />
       </Routes>
     </>
   )
