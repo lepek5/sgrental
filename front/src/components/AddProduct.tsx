@@ -11,7 +11,6 @@ const emptyProduct = {
 };
 const AddProduct = () => {
   const [product, setProduct] = useState<IProduct>(emptyProduct);
-  const [category, setCategory] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, id: key } = event.target;
@@ -33,10 +32,6 @@ const AddProduct = () => {
   const handleSubmit = async () => {
     createMutation.mutateAsync(product);
   };
-  const handleCategoryChange = (event: any) => {
-    const { value, key } = event.target;
-    setCategory(value);
-  }
   const handleCategory = async (event: any) => {
     const { code } = event;
     const { value } = event.target;
@@ -46,7 +41,6 @@ const AddProduct = () => {
       });
       setProduct(prod => ({ ...prod, categories }));
       event.target.value = "";
-      setCategory("");
     }
   };
   return (
@@ -62,7 +56,7 @@ const AddProduct = () => {
       </div>
       <div className="form-item">
         <label htmlFor="tags">Tunnisteet (erottele pilkulla)</label>
-        <input onKeyDown={handleCategory} onChange={handleCategoryChange} type="text" name="category" id="category" /><br />
+        <input onKeyDown={handleCategory} type="text" name="category" id="category" /><br />
       </div>
       {categories.map((category, idx) => <em key={idx}>{category} <span id={idx.toString()} onClick={
         (e) => {
