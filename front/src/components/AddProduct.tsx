@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { IProduct } from "../interfaces/IProduct";
 import ProductService from "../services/product.service";
+import { useMutation, useQueryClient } from "react-query";
+import productService from "../services/product.service";
 const emptyProduct = {
   title: "",
   description: "",
@@ -15,12 +17,21 @@ const AddProduct = () => {
     const { value, id: key } = event.target;
     setProduct({ ...product, [key]: key === "price" ? parseInt(value) : value });
   }
+  const queryClient = useQueryClient();
+  const createMutation = useMutation(async (payload: IProduct) => {
+    return await productService.createProduct(payload)
+  },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("products");
+        alert("Product added!");
+      }
+    });
   useEffect(() => {
     setProduct(prod => ({ ...prod, categories }))
   }, [categories]);
   const handleSubmit = async () => {
-    const r = await ProductService.addProduct(product);
-    console.log(r);
+    createMutation.mutateAsync(product);
   };
   const handleCategoryChange = (event: any) => {
     const { value, key } = event.target;
