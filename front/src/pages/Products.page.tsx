@@ -1,10 +1,7 @@
-import { parse } from "path";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "../components/AddProduct";
 import ProductList from "../components/ProductList";
-import { IProduct } from "../interfaces/IProduct";
-import ProductService from "../services/product.service";
 import ProductsDash from "../components/Products.dash";
 import { useQuery } from "react-query";
 import productService from "../services/product.service";

@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { IProduct } from "../interfaces/IProduct";
-import ProductService from "../services/product.service";
 import { useMutation, useQueryClient } from "react-query";
 import productService from "../services/product.service";
 const emptyProduct = {

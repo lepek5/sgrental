@@ -1,6 +1,5 @@
 import React from 'react'
 import { IReservation } from "../interfaces/IReservation"
-import ReservationService from "../services/reservation.service"
 import { useMutation, useQueryClient } from "react-query";
 import reservationService from "../services/reservation.service";
 

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, Route, Routes } from "react-router-dom";
 import ReservationsList from "../components/Reservations.list";
-import { IReservation } from "../interfaces/IReservation";
-import ReservationService from "../services/reservation.service";
 import AddReservation from "../components/addReservation";
 import ReservationsDash from "../components/Reservations.dash";
 import { useQuery } from "react-query";

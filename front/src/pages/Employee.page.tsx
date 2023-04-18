@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import AddEmployee from "../components/AddEmployee";
 import EmployeeDash from "../components/Employee.dash";
 import employeeService from "../services/employee.service";
 import EmployeeList from "../components/Employee.list";
-import { IEmployee } from "../interfaces/IEmployee";
 import { useQuery } from "react-query";
 const EmployeePage = () => {
   const { data: employees, isLoading } = useQuery(

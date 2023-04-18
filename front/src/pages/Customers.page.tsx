@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, Route, Routes } from "react-router-dom"
 import AddCustomer from "../components/AddCustomer";
 import CustomerList from "../components/Customer.list";
