@@ -21,7 +21,7 @@ const config = {
     host: process.env.FRONTEND_URI
   },
   utils: {
-    generateRandomPassword: async () =>(new Date().getTime()).toString(36),
+    generateRandomPassword: async () => (new Date().getTime()).toString(36),
     hashPassword: async (secret: string) => {
       const salt = await bcrypt.genSalt(SaltRounds);
       return await bcrypt.hash(secret, salt);
