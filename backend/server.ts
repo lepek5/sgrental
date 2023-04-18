@@ -22,7 +22,6 @@ server.use(cors({
 server.use(cookieParser());
 server.use(authHandler);
 server.use("/api", Api);
-
 server.use(errorHandler);
 
 const startServer = async () => {
