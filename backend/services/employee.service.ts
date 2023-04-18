@@ -21,7 +21,7 @@ const createEmployee = async (payload: any) => {
     if (!user) {
       throw Error("Error creating new account");
     }
-    const { userEmail, id: userId } = user.toJSON();
+    const { email: userEmail, id: userId } = user.toJSON();
     const result = await Employee.create({...employee, userId});
     if (!result) throw Error("Error creating new employee account");
     const response = {

@@ -1,8 +1,10 @@
 import React, { CSSProperties, useState } from 'react'
 import { ICustomer } from "../interfaces/ICustomer";
 import customerService from "../services/customer.service";
+import { useMutation, useQueryClient } from "react-query";
 
 const AddCustomer = () => {
+  const queryClient = useQueryClient();
   const [notification, setNotification] = useState("");
   const [customer, setCustomer] = useState<ICustomer>({
     name: "",
@@ -11,6 +13,20 @@ const AddCustomer = () => {
     address: "",
     dateOfBirth: ""
   });
+
+  const createMutation = useMutation(async (payload: ICustomer) => {
+    return await customerService.createCustomer(payload)
+  },
+    {
+      onSuccess: ({ data }) => {
+        queryClient.invalidateQueries("customers");
+        setNotification(`Käyttäjätunnus luotu sähköpostilla ${data.email} ja salasanalla ${data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
+        setTimeout(() => {
+          setNotification("");
+        }, 5000);
+      }
+    });
+
   const notificationStyle = {
     visibility: notification.length > 0 ? "visible" : "hidden",
     transform: notification.length > 0 ? "scale(1)" : "scale(0)"
@@ -21,12 +37,7 @@ const AddCustomer = () => {
   }
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    const result = await customerService.createCustomer(customer);
-    console.log(result.data)
-    setNotification(`Käyttäjätunnus luotu sähköpostilla ${result.data.email} ja salasanalla ${result.data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
-    setTimeout(() => {
-      setNotification("");
-    },5000);
+    createMutation.mutateAsync(customer);
   }
   return (
     <form onSubmit={onSubmit}>

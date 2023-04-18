@@ -1,13 +1,27 @@
 import React, { CSSProperties, useState } from 'react'
 import { IEmployee } from "../interfaces/IEmployee";
 import employeeService from "../services/employee.service";
+import { useMutation, useQueryClient } from "react-query";
 
 const AddEmployee = () => {
+  const queryClient = useQueryClient();
   const [notification, setNotification] = useState("");
   const [employee, setEmployee] = useState<IEmployee>({
     name: "",
     phone: "",
   });
+  const createMutation = useMutation(async (payload: IEmployee) => {
+    return await employeeService.createEmployee(payload)
+  },
+    {
+      onSuccess: ({ data }) => {
+        queryClient.invalidateQueries("employees");
+        setNotification(`Käyttäjätunnus luotu sähköpostilla ${data.email} ja salasanalla ${data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
+        setTimeout(() => {
+          setNotification("");
+        }, 5000);
+      }
+    });
   const notificationStyle = {
     visibility: notification.length > 0 ? "visible" : "hidden",
     transform: notification.length > 0 ? "scale(1)" : "scale(0)"
@@ -18,12 +32,7 @@ const AddEmployee = () => {
   }
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    const result = await employeeService.createEmployee(employee);
-    console.log(result.data)
-    setNotification(`Käyttäjätunnus luotu sähköpostilla ${result.data.email} ja salasanalla ${result.data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
-    setTimeout(() => {
-      setNotification("");
-    }, 5000);
+    createMutation.mutateAsync(employee);
   }
   return (
     <form onSubmit={onSubmit}>
