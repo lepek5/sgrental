@@ -3,18 +3,26 @@ import { ILogin } from "../interfaces/ILogin";
 import userService from "../services/user.service";
 import { useMutation, useQueryClient } from "react-query";
 import { Storage } from "../utils/helpers";
+import { useNavigate } from "react-router";
 
 const Login = () => {
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState<ILogin>({
     email: "",
     password: ""
   });
   const login = useMutation(async (payload: ILogin) => await userService.login(payload),
-  {
-    onSuccess: (data) => {
-    }
-  });
+    {
+      onSuccess(data) {
+        console.error(data)
+        if (data.status !== 200) {
+          alert("Tapahtui virhe sisäänkirjautumisessa");
+          setCredentials({email: "", password: ""});
+        } else {
+          navigate("/");
+        }
+      }
+    });
   const handleInputChange = (event: any) => {
     const { id, value } = event.target;
     setCredentials({ ...credentials, [id]: value });
@@ -35,11 +43,11 @@ const Login = () => {
         <form id="user-login" onSubmit={onSubmit}>
           <div className="form-item">
             <label htmlFor="name">Sähköposti</label>
-            <input onChange={handleInputChange} placeholder="" type="text" id="email" name="email" />
+            <input onChange={handleInputChange} autoComplete="off" value={credentials.email} placeholder="" type="text" id="email" name="email" />
           </div>
           <div className="form-item">
             <label htmlFor="name">Salasana</label>
-            <input onChange={handleInputChange} placeholder="salasana.." type="password" id="password" name="password" />
+            <input onChange={handleInputChange} autoComplete="off" value={credentials.password} placeholder="salasana.." type="password" id="password" name="password" />
           </div>
           <button type="submit">Kirjaudu</button>
         </form>

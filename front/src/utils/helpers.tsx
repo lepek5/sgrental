@@ -1,3 +1,6 @@
+import { useQuery } from "react-query";
+import userService from "../services/user.service";
+
 const Storage = (type: string, key: string, value?: string) => {
   switch (type) {
     case "get":
@@ -10,4 +13,9 @@ const Storage = (type: string, key: string, value?: string) => {
   }
 }
 const parseFromEntry = (arr: any[]) => { return { key: arr[0], value: arr[1] } };
-export {parseFromEntry, Storage};
+
+const getUser = () => {
+  const { data } = useQuery("user", async () => await userService.whoami());
+  return data;
+}
+export {parseFromEntry, Storage, getUser};

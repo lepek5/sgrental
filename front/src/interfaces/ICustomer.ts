@@ -7,3 +7,6 @@ export interface ICustomer {
   dateOfBirth: string,
   phone: string,
 }
+export interface ICustomerRegister extends ICustomer {
+  password: string
+}

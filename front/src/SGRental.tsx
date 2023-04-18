@@ -12,6 +12,7 @@ import ReservationPage from "./pages/Reservations.page";
 import LoginPage from "./pages/Login.page";
 import { Storage } from "./utils/helpers";
 import Logout from "./components/Logout";
+import Register from "./components/Register";
 
 const SGRental = () => {
   return (
@@ -21,6 +22,7 @@ const SGRental = () => {
           <Routes>
             <Route path="login" element={<LoginPage />} />
             <Route path="logout" element={<Logout />} />
+            <Route path="register" element={<Register />} />
             <Route path="dash/*" element={<DashboardPage />} />
             <Route path="employee" element={<EmployeePage />} />
             <Route path="products/*" element={<Products />} />

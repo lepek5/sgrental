@@ -6,7 +6,6 @@ const Product = ({ product }: { product: IProduct }) => {
   const handleModal = () => {
     setModalOpen(!modalOpen);
   }
-  console.log("Product", product)
   if (!product) return <>no product</>
   return (
     <>

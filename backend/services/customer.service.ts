@@ -14,7 +14,7 @@ const customerService = {
   },
   createCustomer: async (payload: any) => {
     const { email, ...customer } = payload;
-    const password = await config.utils.generateRandomPassword();
+    const password = customer.password ? customer.password : await config.utils.generateRandomPassword();
     const hash = await config.utils.hashPassword(password);
     try {
       const user = await User.create({email, password: hash});

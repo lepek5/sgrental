@@ -18,12 +18,14 @@ const getById = async (id: string) => {
 const login = async (credentials: ILogin) => {
   try {
     const login = await apiService.post("users/login", credentials);
-    const { id: userId, token } = login.data;
-    localStorage.setItem("token", token);
-    localStorage.setItem("userId", userId);
-    return login.data;
+    if (login.status === 200) {
+      const { id: userId, token } = login.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+      return {...login.data, status: 200};
+    }
   } catch (err) {
-    throw err;
+    return err.response.data;
   }
 }
 const whoami = async () => {
@@ -31,7 +33,6 @@ const whoami = async () => {
     const result = await apiService.get("users/whoami");
     if (result.status === 200) return result.data;
   } catch (err) {
-    console.error(err);
   }
 }
 export default { createUser, getAll, getById, login, whoami };

@@ -17,6 +17,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       if (login) {
         const token = config.utils.createToken({ id: jsonUser.id, email: jsonUser.email });
         res.status(httpStatus.SUCCESS).json({
+          code: 200,
           id: jsonUser.id,
           email: jsonUser.email,
           token
@@ -62,5 +63,6 @@ const whoami = (req: IRequest, res: Response, next: NextFunction) => {
   } catch (err) {
     next(err);
   }
-}
+};
+
 export default { login, createUser , getAll, whoami};
