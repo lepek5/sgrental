@@ -16,7 +16,7 @@ const AddProduct = () => {
     setProduct({ ...product, [key]: key === "price" ? parseInt(value) : value });
   }
   useEffect(() => {
-    setProduct(prod => ({...prod, categories}))
+    setProduct(prod => ({ ...prod, categories }))
   }, [categories]);
   const handleSubmit = async () => {
     const r = await ProductService.addProduct(product);
@@ -33,7 +33,7 @@ const AddProduct = () => {
       setCategories(cats => {
         return [...cats, value]
       });
-      setProduct(prod => ({...prod, categories}));
+      setProduct(prod => ({ ...prod, categories }));
       event.target.value = "";
       setCategory("");
     }
@@ -41,20 +41,29 @@ const AddProduct = () => {
   return (
     <section id="add-product">
       <h3>Lisää tuote</h3>
-      <label htmlFor="title">Otsikko</label>
-      <input onChange={handleInputChange} type="text" name="title" id="title" /><br />
-      <label htmlFor="description">Tarkenne</label>
-      <input onChange={handleInputChange} type="text" name="description" id="description" /><br />
-      <label htmlFor="tags">Tunnisteet (erottele pilkulla)</label>
-      <input onKeyDown={handleCategory} onChange={handleCategoryChange} type="text" name="category" id="category" /><br />
+      <div className="form-item">
+        <label htmlFor="title">Nimi</label>
+        <input onChange={handleInputChange} type="text" name="title" id="title" /><br />
+      </div>
+      <div className="form-item">
+        <label htmlFor="description">Tarkenne</label>
+        <input onChange={handleInputChange} type="text" name="description" id="description" /><br />
+      </div>
+      <div className="form-item">
+        <label htmlFor="tags">Tunnisteet (erottele pilkulla)</label>
+        <input onKeyDown={handleCategory} onChange={handleCategoryChange} type="text" name="category" id="category" /><br />
+      </div>
       {categories.map((category, idx) => <em key={idx}>{category} <span id={idx.toString()} onClick={
         (e) => {
           const target = e.target as HTMLSpanElement;
           setCategories(categories.filter((c, i) => i.toString() !== target.id));
         }
       } key={idx}>[x] </span></em>)}
-      <br /><label htmlFor="price">Hinta per vrk</label>
-      <input onChange={handleInputChange} type="number" name="price" id="price" /><br />
+      <br />
+      <div className="form-item">
+        <label htmlFor="price">Hinta per vrk</label>
+        <input onChange={handleInputChange} type="number" name="price" id="price" /><br />
+      </div>
       <button onClick={handleSubmit}>Lisää tuote</button>
       <button>Tyhjennä kentät</button>
     </section>

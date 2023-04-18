@@ -7,17 +7,18 @@ import ProductsPage from "./Products.page";
 import ReservationPage from "./Reservations.page";
 import Dashboard from "../components/Dashboard.dash";
 import EmployeePage from "./Employee.page";
+import UserDetailsPage from "./UserDetails.page";
 const DashboardPage = () => {
   return (
     <>
       <DashboardNavbar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="add-product" element={<AddProduct />} />
         <Route path="products/*" element={<ProductsPage />} />
         <Route path="reservations/*" element={<ReservationPage />} />
         <Route path="customers/*" element={<CustomersPage />} />
         <Route path="employees/*" element={<EmployeePage />} />
+        <Route path="user/:id" element={<UserDetailsPage />} />
       </Routes>
     </>
   )

@@ -12,7 +12,6 @@ const authHandler = async (req: IRequest, res: Response, next: NextFunction) => 
       const user = await userService.getByEmail(decoded.email);
       if (user) {
         req.user = user;
-        req.userJSON = user.toJSON();
       }
     }
   }

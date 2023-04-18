@@ -30,8 +30,7 @@ const AddCustomer = () => {
   }
   return (
     <form onSubmit={onSubmit}>
-      <div style={notificationStyle} className={notification.length > 1 ? "modal" : ""} id="notification">{notification}</div>
-      <h2>Rekisteröi käyttäjä</h2>
+      <h3>Rekisteröi käyttäjä</h3>
       <div className="form-item">
         <label htmlFor="name">Nimi</label>
         <input onChange={handleInputChange} placeholder="" type="text" id="name" name="name" />
@@ -57,6 +56,7 @@ const AddCustomer = () => {
         <input onChange={handleInputChange} placeholder="" type="date" id="dateOfBirth" name="dateOfBirth" />
       </div>
       <button type="submit">Rekisteröi asiakas</button>
+      <div style={notificationStyle} className={notification.length > 1 ? "modal" : ""} id="notification">{notification}</div>
     </form>
   )
 }
