@@ -13,9 +13,9 @@ const getAll = async (): Promise<IProduct[]> => {
   });
   return products;
 }
-const addProduct = async (product: IProduct): Promise<IProduct> => {
+const createProduct = async (product: IProduct): Promise<IProduct> => {
   const result = await apiService.post("products", product);
   return result.data;
 }
 
-export default { addProduct, getAll };
+export default { createProduct, getAll };

@@ -3,7 +3,7 @@ import apiService from "./api.service";
 const createEmployee = async (payload: any) => {
   try {
     const result = await apiService.post("employees", payload);
-    return result;
+    return result.data;
   } catch (err) {
     throw (err);
   }

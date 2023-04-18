@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { ILogin } from "../interfaces/ILogin";
-import { IUser, IUserLogin } from "../interfaces/IUser";
 import UserService from "../services/user.service";
 
 const AddUser = () => {
