@@ -6,24 +6,9 @@ import UserDetailsDash from "../components/UserDetails.dash";
 import UserDetails from "../components/UserDetails";
 
 const UserDetailsPage = () => {
-  const { id }  = useParams();
-  const [user, setUser] = useState({
-    id: 0
-  });
-  const [edit, setEdit] = useState(false);
-  useEffect(() => {
-    const fetchUser = async () => {
-      const result = await UserService.getById(id);
-      setUser(result);
-    }
-    fetchUser();
-  }, [id])
-  if(!user) {
-    return (<p>Lataan tai muuta vikaa...</p>)
-  }
   return (
     <main id="reservations">
-      <h2>Varaukset</h2>
+      <h2>Hallintapaneeli</h2>
       <nav className="sub-nav">
         <Link to="details">Omat tiedot</Link>
         <Link to="reservations">Omat varaukset</Link>
