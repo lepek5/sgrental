@@ -14,7 +14,6 @@ const Products = () => {
     'products',
     async () => await productService.getAll()
   );
-  if (isLoading) return (<em>Lataan tuotteita..</em>);
   return (
     <main id="products">
       <h2>Tuotteet</h2>
@@ -24,11 +23,13 @@ const Products = () => {
         <Link to="list">Etsi</Link>
       </nav>
       <section id="content">
-        <Routes>
-          <Route path="/" element={<ProductsDash />} />
-          <Route path="add" element={<AddProduct />} />
-          <Route path="list" element={<ProductList products={products} />} />
-        </Routes>
+        {isLoading ? (<em>Lataan tuotteita..</em>) : (
+          <Routes>
+            <Route path="/" element={<ProductsDash />} />
+            <Route path="add" element={<AddProduct />} />
+            <Route path="list" element={<ProductList products={products} />} />
+          </Routes>
+        )}
       </section>
     </main>
   )

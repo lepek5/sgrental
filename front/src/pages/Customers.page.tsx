@@ -10,7 +10,6 @@ const CustomersPage = () => {
     "customers",
     async () => await customerService.getAll()
   );
-  if (isLoading) return (<em>Lataan asiakkaita..</em>)
   return (
     <main id="customers">
       <h2>Asiakkaat</h2>
@@ -19,11 +18,13 @@ const CustomersPage = () => {
         <Link to="list">Selaa</Link>
       </nav>
       <section id="content">
-        <Routes>
+        { isLoading ? (<em>Lataan asiakkaita..</em>) : (
+          <Routes>
           <Route path="/" element={<Customers />} />
           <Route path="add" element={<AddCustomer />} />
           <Route path="list" element={<CustomerList customers={customers} />} />
         </Routes>
+        )}
       </section>
     </main>
   )

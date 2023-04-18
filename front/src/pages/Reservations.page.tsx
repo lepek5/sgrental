@@ -5,16 +5,14 @@ import { IReservation } from "../interfaces/IReservation";
 import ReservationService from "../services/reservation.service";
 import AddReservation from "../components/addReservation";
 import ReservationsDash from "../components/Reservations.dash";
+import { useQuery } from "react-query";
+import reservationService from "../services/reservation.service";
 
 const ReservationPage = () => {
-  const [reservations, setReservations] = useState<IReservation[]>([]);
-  useEffect(() => {
-    const getReservations = async () => {
-      const res = await ReservationService.getAll();
-      setReservations(res);
-    }
-    getReservations();
-  }, []);
+  const { data: reservations, isLoading } = useQuery(
+    "reservations",
+    async () => await reservationService.getAll()
+  );
   return (
     <main id="reservations">
       <h2>Varaukset</h2>
@@ -23,12 +21,14 @@ const ReservationPage = () => {
         <Link to="list">Selaa</Link>
       </nav>
       <section id="content">
-        <Routes>
+        { isLoading ? (<em>Lataan varauksia..</em>) : (
+          <Routes>
           <Route path="/" element={<ReservationsDash />} />
           <Route path="list" element={
             <ReservationsList reservations={reservations} />} />
           <Route path="add" element={<AddReservation />} />
         </Routes>
+        )}
       </section>
     </main>
   )
