@@ -36,7 +36,20 @@ const createEmployee = async (payload: any) => {
     throw err;
   }
 }
+const getEmployeeByUserId = async (userId: string) => {
+  try {
+    const result = await Employee.findOne({
+      where: {
+        userId: userId
+      }
+    })
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
 export default {
   getAll,
-  createEmployee
+  createEmployee,
+  getEmployeeByUserId
 }

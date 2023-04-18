@@ -3,61 +3,64 @@ import config from "../config";
 import userService from "../services/user.service";
 import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
+import { IRequest } from "../interfaces/IRequest";
+import Customer from "../models/customer";
 
-const userController = {
-  login: async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.body) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing credentials");
-    const { email, password } = req.body;
-    try {
-      const user = await userService.getByEmail(email);
-      if (user) {
-        const jsonUser = user.toJSON();
-        const login = await config.utils.comparePassword(password, jsonUser.password);
-        if (login) {
-          const token = config.utils.createToken({ id: jsonUser.id, email: jsonUser.email });
-          res.cookie("token", token, { httpOnly: true });
-          res.status(httpStatus.SUCCESS).json({
-            id: jsonUser.id,
-            email: jsonUser.email,
-            token
-          })
-          return;
-        }
-        throw new HtmlError(httpStatus.UNAUTHORIZED, "Wrong credentials");
+const login = async (req: Request, res: Response, next: NextFunction) => {
+  if (!req.body) throw new HtmlError(httpStatus.BAD_REQUEST, "Missing credentials");
+  const { email, password } = req.body;
+  try {
+    const user = await userService.getByEmail(email);
+    if (user) {
+      const jsonUser = user.toJSON();
+      const login = await config.utils.comparePassword(password, jsonUser.password);
+      if (login) {
+        const token = config.utils.createToken({ id: jsonUser.id, email: jsonUser.email });
+        res.status(httpStatus.SUCCESS).json({
+          id: jsonUser.id,
+          email: jsonUser.email,
+          token
+        })
+        return;
       }
-      throw new HtmlError(httpStatus.NOT_FOUND, "User not found");
-    } catch (err) {
-      next(err);
+      throw new HtmlError(httpStatus.UNAUTHORIZED, "Wrong credentials");
     }
-  },
-  createUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { body } = req;
-    try {
-      const result = await userService.createUser(body);
-      res.status(httpStatus.CREATED).json({ "Account created": "ok" });
-    } catch (err) {
-      next(err);
-    }
-  },
-  getAll: async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const result = await userService.getAll();
-      if (!result) {
-        throw new HtmlError(httpStatus.NOT_FOUND, "Failed to get users");
-      }
-      res.status(httpStatus.SUCCESS).json(result);
-    } catch (err) {
-      next(err);
-    }
-  },
-  getById: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    try {
-      const result = await userService.getById(id);
-      res.status(httpStatus.SUCCESS).json(result);
-    } catch (err) {
-      next(err);
-    }
+    throw new HtmlError(httpStatus.NOT_FOUND, "User not found");
+  } catch (err) {
+    next(err);
   }
 }
-export default userController;
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
+  const { body } = req;
+  try {
+    const result = await userService.createUser(body);
+    res.status(httpStatus.CREATED).json({ "Account created": "ok" });
+  } catch (err) {
+    next(err);
+  }
+}
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await userService.getAll();
+    if (!result) {
+      throw new HtmlError(httpStatus.NOT_FOUND, "Failed to get users");
+    }
+    res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+const whoami = (req: IRequest, res: Response, next: NextFunction) => {
+  const { user } = req;
+  if (!user) {
+    res.status(httpStatus.NOT_FOUND).json({msg: "user not found", code: httpStatus.NOT_FOUND});
+    return;
+  }
+  try {
+    const type = user instanceof Customer ? "customer" : "employee";
+    res.status(httpStatus.SUCCESS).json({...user.toJSON(), type});
+  } catch (err) {
+    next(err);
+  }
+}
+export default { login, createUser , getAll, whoami};

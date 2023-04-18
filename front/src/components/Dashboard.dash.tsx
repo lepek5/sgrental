@@ -1,7 +1,10 @@
 import React from 'react'
+import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  const client = useQueryClient();
+  console.log("cöluient", client);
   return (
     <main id="dashboard">
       <h2>Hallintapaneeli</h2>

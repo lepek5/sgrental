@@ -10,6 +10,8 @@ import DashboardPage from "./pages/Dashboard.page";
 import Products from "./components/Products";
 import ReservationPage from "./pages/Reservations.page";
 import LoginPage from "./pages/Login.page";
+import { Storage } from "./utils/helpers";
+import Logout from "./components/Logout";
 
 const SGRental = () => {
   return (
@@ -18,6 +20,7 @@ const SGRental = () => {
           <Header />
           <Routes>
             <Route path="login" element={<LoginPage />} />
+            <Route path="logout" element={<Logout />} />
             <Route path="dash/*" element={<DashboardPage />} />
             <Route path="employee" element={<EmployeePage />} />
             <Route path="products/*" element={<Products />} />

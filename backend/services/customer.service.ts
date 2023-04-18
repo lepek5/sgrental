@@ -37,8 +37,17 @@ const customerService = {
       throw err;
     }
   },
-  getCustomerById: async () => {
-
+  getCustomerByUserId: async (userId: string) => {
+    try {
+      const result = await Customer.findOne({
+        where: {
+          userId: userId
+        }
+      })
+      return result;
+    } catch (err) {
+      throw err;
+    }
   }
 }
 export default customerService;

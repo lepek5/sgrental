@@ -5,3 +5,7 @@ export interface IUser {
 export interface IUserLogin extends IUser {
   password: string
 }
+
+export interface IUserToken extends IUser {
+  token?: string
+}

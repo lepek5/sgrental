@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { ILogin } from "../interfaces/ILogin";
 import userService from "../services/user.service";
-import Helpers from "../utils/helpers";
+import { useMutation, useQueryClient } from "react-query";
+import { Storage } from "../utils/helpers";
 
 const Login = () => {
+  const queryClient = useQueryClient();
   const [credentials, setCredentials] = useState<ILogin>({
     email: "",
     password: ""
+  });
+  const login = useMutation(async (payload: ILogin) => await userService.login(payload),
+  {
+    onSuccess: (data) => {
+    }
   });
   const handleInputChange = (event: any) => {
     const { id, value } = event.target;
@@ -15,11 +22,7 @@ const Login = () => {
   const onSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      const result = await userService.login(credentials);
-      if (result.token) {
-        Helpers.storage.set("token", result.token);
-      }
-      return result;
+      login.mutateAsync(credentials);
     } catch (err) {
       console.error(err);
     }

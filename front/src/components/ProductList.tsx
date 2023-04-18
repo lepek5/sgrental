@@ -1,6 +1,6 @@
 import React from 'react'
 import { IProduct } from "../interfaces/IProduct"
-import Helpers from "../utils/helpers";
+import { parseFromEntry } from "../utils/helpers";
 
 const ProductList = ({ products }: { products: IProduct[] }) => {
   if (products.length < 1) return <h3>Loading...</h3>
@@ -17,7 +17,7 @@ const ProductList = ({ products }: { products: IProduct[] }) => {
           {products.map(product => (
             <tr key={product.id}>
               {Object.entries(product).map(entry => {
-                const { key, value } = Helpers.parse.fromEntry(entry);
+                const { key, value } = parseFromEntry(entry);
                 return (
                   <td key={value.toString()}>{
                     key !== "categories" ? value : value.join(", ")

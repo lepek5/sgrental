@@ -1,14 +1,13 @@
-const Helpers = {
-  parse: {
-    datetimeToDate: (datetime: string) => {
-      const date = new Date(datetime);
-      return date.toISOString().split("T")[0];
-    },
-    fromEntry: (arr: any[]) => { return { key: arr[0], value: arr[1] } }
-  },
-  storage: {
-    set: (key: string, value: string) => localStorage.setItem(key, value),
-    get: (key: string) => localStorage.getItem(key)
+const Storage = (type: string, key: string, value?: string) => {
+  switch (type) {
+    case "get":
+      return JSON.parse(localStorage.getItem(key));
+    case "set":
+      localStorage.setItem(key, JSON.stringify(value));
+      return;
+    default:
+      break;
   }
 }
-export default Helpers;
+const parseFromEntry = (arr: any[]) => { return { key: arr[0], value: arr[1] } };
+export {parseFromEntry, Storage};
