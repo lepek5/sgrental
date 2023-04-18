@@ -14,7 +14,7 @@ const getAll = async () => {
 }
 const createEmployee = async (payload: any) => {
   const { email, ...employee } = payload;
-  const password = await config.utils.generateRandomPassword();
+  const password = employee.password ? employee.password : await config.utils.generateRandomPassword();
   const hash = await config.utils.hashPassword(password);
   try {
     const user = await User.create({email, password: hash});

@@ -8,6 +8,7 @@ import Database from "./database";
 import cookieHandler from "./middleware/cookieHandler";
 import authHandler from "./middleware/authHandler";
 import cookieParser from "cookie-parser";
+import createUsers from "./utils/createInitUsers";
 const server = express();
 const origins = ["http://192.168.0.4:9000", "http://localhost:9000", "http://127.0.0.1:9000"]
 const corsOpts = {
@@ -28,8 +29,9 @@ const startServer = async () => {
   try {
     await Database.connect();
     await Database.runMigrate();
-    server.listen(config.express.port, config.express.host, () => {
+    server.listen(config.express.port, config.express.host, async () => {
       console.log(`Express is running at ${config.express.host}:${config.express.port}`)
+      await createUsers();
     });
   } catch (error: unknown) {
     console.error(error instanceof Error ? error.message : "Express encountered an error trying to start")
