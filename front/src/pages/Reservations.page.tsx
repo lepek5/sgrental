@@ -5,6 +5,7 @@ import AddReservation from "../components/addReservation";
 import ReservationsDash from "../components/Reservations.dash";
 import { useQuery } from "react-query";
 import reservationService from "../services/reservation.service";
+import ReservationDetails from "../components/Reservation.details";
 
 const ReservationPage = () => {
   const { data: reservations, isLoading } = useQuery(
@@ -25,6 +26,7 @@ const ReservationPage = () => {
           <Route path="list" element={
             <ReservationsList reservations={reservations} />} />
           <Route path="add" element={<AddReservation />} />
+          <Route path=":id" element={<ReservationDetails />} />
         </Routes>
         )}
       </section>

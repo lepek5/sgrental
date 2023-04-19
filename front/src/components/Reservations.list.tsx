@@ -1,17 +1,26 @@
 import React from 'react'
 import { IReservation } from "../interfaces/IReservation"
+import { Link } from "react-router-dom"
 
 const ReservationsList = ({ reservations }: { reservations: IReservation[] }) => {
   return (
-    <table>
-      {
-        reservations.map(r => (
-        <>
-        <tr>{Object.keys(r).map(k => <th>{k}</th>)}</tr>
-        <tr>{Object.values(r).map(v => <td>{v}</td>)}</tr>
-        </>
-        ))
-      }
+    <table id="reservations">
+      <thead>
+        <tr>
+          {Object.keys(reservations[0]).map(header => (
+            <th key={header}>{header}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {reservations.map((res, idx) => (
+          <tr key={idx}>
+            {Object.values(res).map((value, valueIdx) => (
+                <td key={`${idx}-${valueIdx}`}><Link to={`../${res.id}`}>{value}</Link></td>              
+            ))}
+          </tr>
+        ))}
+      </tbody>
     </table>
   )
 }

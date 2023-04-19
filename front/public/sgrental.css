@@ -332,3 +332,19 @@ a, a:hover, a:visited, a:active {
   padding: 0.3rem;
   background-color: var(--must-blue-alpha-5);
 }
+
+table#reservations {
+  width: 95%;
+  box-shadow: 0 0 5px 0 var(--must-blue-alpha-5);
+}
+table#reservations th {
+  border-bottom: 3px double var(--must-blue);
+}
+table#reservations td {
+  text-align: center;
+  padding: 0.3rem;
+}
+table#reservations td:hover {
+  background-color: var(--green-alpha-2);
+  transition: all 200ms linear;
+}
