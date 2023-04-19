@@ -1,11 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import productService from "../services/product.service";
+import { UserContext } from "../utils/use-auth";
+import reservationService from "../services/reservation.service";
 
 const ProductReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const user = useContext(UserContext);
   const [reservation, setReservation] = useState({
     start: "",
     end: ""
@@ -23,20 +26,31 @@ const ProductReservation = () => {
     const difference = new Date(end).getTime() - new Date(start).getTime();
     setDays(parseDayDifference(difference));
   }, [reservation]);
-  const handleSubmit = () => {
+  
+  const { data: product, isLoading } = useQuery(["products", id], async () => {
+    return await productService.getById(id);
+  });
+  if (isLoading) return (<em>Ladataan..</em>);
+  const confimString = `Haluatko vuokrata tuotteen \"${product.title}\" aikavälille ${new Date(reservation.start).toDateString()} - ${new Date(reservation.end).toDateString()} hintaan ${days*product.price} euroa?`
+  const handleSubmit = async () => {
     if (days < 1) {
       alert("Minimivuokra-aika on 1 vuorokausi!");
     } else if (new Date().getTime() > new Date(reservation.start).getTime()) {
       alert("Et voi varata menneisyydestä!")
     } else {
-      const isOk = confirm("Haluatko vuokrata tuotteen \"" + product.title + "\" aikavälille " + new Date(reservation.start).toDateString() + " - " + new Date(reservation.end).toDateString()+" hintaan " + days*product.price + " euroa?");
-      if (isOk) alert("varattu!")
+      const isOk = confirm(confimString);
+      if (isOk) {
+      console.log("USER", user);
+        const request = {
+          productId: product.id,
+          customerId: user.id,
+          startAt: reservation.start,
+          endAt: reservation.end
+        }
+        const result = await reservationService.createReservation(request); 
+      }
     }
   }
-  const { data: product, isLoading } = useQuery(["products", id], async () => {
-    return await productService.getById(id);
-  });
-  if (isLoading) return (<em>Ladataan..</em>);
   if (!product) return (<em>Tuotetta ei löydy</em>);
   return (
     <div className="product-reservation">
@@ -61,7 +75,7 @@ const ProductReservation = () => {
         <input onChange={handleDateChange} value={reservation.end} id="end" name="end" type="date" />
       </div>
       {
-        days ? (
+        days > 0 ? (
           <div className="summary">
             Yhteensä <strong>{days}</strong> vuorokautta.<br />
             <div className="total-price">

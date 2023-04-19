@@ -14,7 +14,8 @@ Reservation.init({
     type: DataTypes.INTEGER
   },
   employeeId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    defaultValue: null
   },
   startAt: {
     type: DataTypes.STRING
@@ -23,10 +24,12 @@ Reservation.init({
     type: DataTypes.STRING
   },
   confirmed: {
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   completed: {
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 },{
   sequelize: Database.sequelize,

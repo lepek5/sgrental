@@ -87,10 +87,12 @@ module.exports = {
         type: DataTypes.STRING
       },
       confirmed: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        default: null
       },
       completed: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        default: null
       }
     })
     await queryInterface.createTable("product_details", {
@@ -122,7 +124,7 @@ module.exports = {
     })
     await queryInterface.addColumn("reservations", "employee_id", {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: { model: "employees", key: "id" }
     })
     await queryInterface.addColumn("product_details", "product_id", {

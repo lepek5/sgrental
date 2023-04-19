@@ -20,6 +20,7 @@
   --must-blue-alpha-5: rgba(0, 85, 159, 0.2);
   --green: rgb(0, 219, 117);
   --green-alpha-5: rgba(0, 219, 117, 0.5);
+  --green-alpha-2: rgba(0, 219, 117, 0.2);
   --dark-green: rgb(0, 59, 32);
   --bright-blue: #1f90bb;
   --bright-green-blue: #23a1d1;
@@ -321,6 +322,9 @@ a, a:hover, a:visited, a:active {
 }
 .product-reservation .product {
   font-size: 1.2rem;
+  background-color: var(--green-alpha-2);
+  border-radius: 0.3rem;
+  padding: 0.5rem;
 }
 
 .product-reservation .help, .product-reservation .summary {

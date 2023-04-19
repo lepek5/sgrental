@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 const createReservation = async (req: Request, res: Response) => {
   const { body } = req;
   const result = await reservationService.createReservation(body);
-  res.json(result);
+  console.log("Reservation controller", result);
 }
 const getAll = async (req: Request,res: Response) => {
   const result = await reservationService.getAll();
