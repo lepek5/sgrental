@@ -17,7 +17,10 @@
 }
 :root {
   --must-blue: rgb(0, 85, 159);
-  --must-blue-alpha-5: rgba(0, 85, 159, 0.1);
+  --must-blue-alpha-5: rgba(0, 85, 159, 0.2);
+  --green: rgb(0, 219, 117);
+  --green-alpha-5: rgba(0, 219, 117, 0.5);
+  --dark-green: rgb(0, 59, 32);
   --bright-blue: #1f90bb;
   --bright-green-blue: #23a1d1;
   --bluewhite: #effeff;
@@ -117,17 +120,37 @@ header {
   height: auto;
 }
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   padding: 0.3rem;
-  max-width: 200px;
   border-radius: 0.5rem;
-  box-shadow: 0 0 4px 0 var(--bluegreen);
+  border: 1px solid var(--must-blue-alpha-5);
+  box-shadow: 0 0 4px 0 var(--must-blue-alpha-5);
   animation: fadeIn 300ms ease-in;
+  width: fit-content;
+  height: fit-content;
 }
 .card .title {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  border-bottom: 1px dashed var(--must-blue-alpha-5);
+  color: var(--must-blue);
 }
 .card .description {
   font-size: 1rem;
+}
+.card .price {
+  text-align: right;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  font-size: 1.1rem;
+  background-color: var(--green-alpha-5);
+  width: fit-content;
+  color: var(--dark-green);
+}
+.card .buttons button {
+  padding: 0.3rem;
+  box-shadow: 0 0 5px 0 rgba(0, 85, 159, 0.3);
 }
 @keyframes fadeIn {
   from {
@@ -242,4 +265,47 @@ a, a:hover, a:visited, a:active {
 .form-item label {
   min-width: 10rem;
   display: inline-block;
+}
+.product-details {
+  width: 85%;
+  padding: 1rem 0.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 15px 0 rgba(0, 85, 159, 0.3);
+  height: fit-content;
+}
+.product-details .title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--must-blue);
+  border-bottom: 1px dashed rgba(0, 85, 159, 0.3);
+}
+.product-details .body {
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.product-details .body .price {
+  font-size: 1.4rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+.product-details .body .price span {
+  background-color: var(--green-alpha-5);
+  padding: 1rem;
+  color: var(--dark-green);
+  border-radius: 50%;
+  letter-spacing: 0.1rem;
+}
+.product-details .tags {
+  font-style: italic;
+  padding: 0.5rem 0rem;
+}
+.product-details .buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.product-details .buttons button {
+  padding: 0.3rem;
+  box-shadow: 0 0 5px 0 rgba(0, 85, 159, 0.3);
 }

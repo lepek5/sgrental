@@ -16,6 +16,11 @@ const getAll = async (): Promise<IProduct[]> => {
 const createProduct = async (product: IProduct): Promise<IProduct> => {
   const result = await apiService.post("products", product);
   return result.data;
+};
+const getById = async (id: string) => {
+  const result = await apiService.get("products/" + id);
+  const product = {...result.data, categories: parseCategoriesToArray(result.data.categories)};
+  return product;
 }
 
-export default { createProduct, getAll };
+export default { createProduct, getAll, getById };

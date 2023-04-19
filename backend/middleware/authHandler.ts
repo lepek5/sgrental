@@ -14,7 +14,7 @@ const getToken = (req: any) => {
   return false;
 }
 
-const authHandler = async (req: IRequest, res: Response, next: NextFunction) => {
+const authHandler = async (req: Request, res: Response, next: NextFunction) => {
   const token = getToken(req);
   if (token) {
     const decoded = config.utils.verifyToken(token) as IUserVerified;

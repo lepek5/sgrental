@@ -1,35 +1,38 @@
 import ProductService from "../services/product.service";
-import { ProductUI } from "../types/product.types";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { httpStatus } from "../utils/httpStatus";
-import categoryService from "../services/category.service";
-import { HtmlError } from "../utils/customErrors";
-import { IRequest } from "../interfaces/IRequest";
-import Customer from "../models/customer";
 import Employee from "../models/employee";
-
-const ProductController = {
-  getAll: async (req: Request, res: Response) => {
-    try {
-      const result = await ProductService.getAll();
-      res.status(httpStatus.SUCCESS).json(result);
-    } catch (err) {
-      throw err;
-    }
-  },
-  addProduct: async (req: IRequest, res: Response) => {
-    const { body, user } = req;
-    if (!(user instanceof Employee)) {
-      res.status(httpStatus.UNAUTHORIZED).json({ error: "Unauthorized", code: httpStatus.UNAUTHORIZED });
-      return;
-    }
-    try {
-      const result = await ProductService.addProduct(body);
-      res.status(httpStatus.CREATED).json(result);
-    } catch (err) {
-      throw (err);
-    }
+import { HtmlError } from "../utils/customErrors";
+const getAll = async (req: Request, res: Response) => {
+  try {
+    const result = await ProductService.getAll();
+    res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    throw err;
   }
 };
-
-export default ProductController;
+const addProduct = async (req: Request, res: Response, next: NextFunction) => {
+  const { body, user } = req;
+  if (!(user instanceof Employee)) {
+    res.status(httpStatus.UNAUTHORIZED).json({ error: "Unauthorized", code: httpStatus.UNAUTHORIZED });
+    return;
+  }
+  try {
+    const result = await ProductService.addProduct(body);
+    res.status(httpStatus.CREATED).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+const getById = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  if (!id) throw new HtmlError(httpStatus.BAD_REQUEST, "Id is required");
+  try {
+    const result = await ProductService.getById(id);
+    if (!result) throw new HtmlError(httpStatus.NOT_FOUND, "Could not find product " + id);
+    res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+export default { getAll, addProduct, getById };

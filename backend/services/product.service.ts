@@ -1,4 +1,3 @@
-import { ProductDB } from "../types/product.types";
 import categoryService from "./category.service";
 import { Product, Category, ProductDetail } from "../models";
 const ProductService = {
@@ -19,15 +18,26 @@ const ProductService = {
       throw error;
     }
   },
-  getById: async (id: number): Promise<ProductDB | any> => {
+  getById: async (id: string): Promise<any> => {
     try {
-      const result = await Product.findByPk(id);
+      const result = await Product.findByPk(id, {
+        nest: true,
+        include: [{
+          model: Category,
+          attributes: {
+            exclude: ["id"]
+          },
+          through: {
+            attributes: []
+          }
+        }]
+      });
       return result;
     } catch (error: unknown) {
       return error;
     }
   },
-  addProduct: async (payload: any): Promise<ProductDB | any> => {
+  addProduct: async (payload: any): Promise<any> => {
     const { categories, ...product } = payload;
     try {
       const result = await Product.create(product);

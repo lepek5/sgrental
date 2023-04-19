@@ -9,7 +9,12 @@ const CustomerList = ({customers}: {customers: ICustomer[]}) => {
   }
   return (
     <>
-    {customers.map(customer => <p>{customer.name}</p>)}
+    {customers.map(customer => (
+      <>
+      <p>{customer.name}</p>
+      <p>{customer.dateOfBirth}</p>
+      </>
+    ))}
     </>
   )
 };

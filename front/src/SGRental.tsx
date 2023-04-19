@@ -1,16 +1,13 @@
 import React from "react"
 import Header from "./components/Header";
 import LandingPage from "./pages/Landing.page"
-
 import "../public/sgrental.css";
 import Footer from "./components/Footer";
 import EmployeePage from "./pages/Employee.page";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard.page";
-import Products from "./components/Products";
-import ReservationPage from "./pages/Reservations.page";
+import Products from "./components/ProductListing";
 import LoginPage from "./pages/Login.page";
-import { Storage } from "./utils/helpers";
 import Logout from "./components/Logout";
 import Register from "./components/Register";
 

@@ -1,29 +1,34 @@
 import { NextFunction, Request, Response } from "express";
-import User from "../models/user";
 import customerService from "../services/customer.service";
-import userService from "../services/user.service";
 import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
-import userController from "./user.controller";
-
-const customerController = {
-  getAll: async (req: Request, res: Response, next: NextFunction)=> {
-    try {
-      const result = await customerService.getAll();
-      if (!result) throw new HtmlError(httpStatus.NOT_FOUND, "Error fetching customers");
-      res.status(httpStatus.SUCCESS).json(result);
-    } catch (err) {
-      next(err);
-    }
-  },
-  createCustomer: async (req: Request, res: Response, next: NextFunction)=> {
-    const { body } = req;
-    try {
-      const result = await customerService.createCustomer(body);
-      res.status(result.status).json(result);
-    } catch (err) {
-      next(err);
-    }
+import { IRequest } from "../interfaces/IRequest";
+const getAll = async (req: Request, res: Response, next: NextFunction)=> {
+  try {
+    const result = await customerService.getAll();
+    if (!result) throw new HtmlError(httpStatus.NOT_FOUND, "Error fetching customers");
+    res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    next(err);
   }
 };
-export default customerController;
+const createCustomer = async (req: Request, res: Response, next: NextFunction)=> {
+  const { body } = req;
+  try {
+    const result = await customerService.createCustomer(body);
+    res.status(result.status).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+const updateCustomer = async (req: Request, res: Response, next: NextFunction ) => {
+  const { user, body } = req;
+  console.log("user", user, "body", body);
+  try {
+    const result = await customerService.updateCustomer(body);
+    res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    throw err;
+  }
+};
+export default { getAll, createCustomer, updateCustomer };

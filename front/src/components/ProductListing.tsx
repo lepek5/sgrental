@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { IProduct } from "../interfaces/IProduct";
 import ProductService from "../services/product.service";
-import Product from "./Product";
-import ProductModal from "./Product.modal";
 import ProductsNavbar from "./Products.Navbar";
+import { Route, Routes } from "react-router-dom";
+import ProductDetails from "./Product.details";
+import ProductCards from "./Product.cards";
 
-const Products = () => {
+const ProductListing = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filters, setFilters] = useState<string>("");
   const [filtered, setFiltered] = useState<IProduct[]>([]);
@@ -46,12 +47,17 @@ const Products = () => {
   if (!products) return <h3>FUCK YOU! NOT PRODUCTS FOR YOU!</h3>
   return (
     <>
-      <section id="products">
+      <main id="products">
         <ProductsNavbar parseFilters={parseFilters} />
-        {filtered.length > 0 ? filtered.map(f => <Product key={f.id} product={f} />) : products.map(f => <Product key={f.id} product={f} />)}
-        <ProductModal visible={true} />
-      </section>
+        <h2>Vuokrattavat tuotteet</h2>
+        <section id="content" style={{display: "flex", gap: "0.4rem", flexDirection: "row", justifyContent: "center"}}>
+          <Routes>
+            <Route path="/" element={<ProductCards filter={filters} products={products} />} />
+            <Route path=":id" element={<ProductDetails />} />
+          </Routes>
+        </section>
+      </main>
     </>
   )
 }
-export default Products;
+export default ProductListing;

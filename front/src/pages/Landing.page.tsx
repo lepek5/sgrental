@@ -1,10 +1,10 @@
 import React from "react"
-import Products from "../components/Products";
+import ProductListing from "../components/ProductListing";
 
 const LandingPage = () => {
   return (
     <>
-    <Products />
+    <ProductListing />
     </>
   )
 };

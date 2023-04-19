@@ -51,15 +51,16 @@ const getAll = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 }
-const whoami = (req: IRequest, res: Response, next: NextFunction) => {
+const whoami = async (req: Request, res: Response, next: NextFunction) => {
   const { user } = req;
   if (!user) {
     res.status(httpStatus.NOT_FOUND).json({msg: "user not found", code: httpStatus.NOT_FOUND});
     return;
   }
   try {
+    const tmp = await userService.getById(user.toJSON().id);
     const type = user instanceof Customer ? "customer" : "employee";
-    res.status(httpStatus.SUCCESS).json({...user.toJSON(), type});
+    res.status(httpStatus.SUCCESS).json({...user.toJSON(), email: tmp?.toJSON().email, type});
   } catch (err) {
     next(err);
   }
