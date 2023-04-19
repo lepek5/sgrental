@@ -1,6 +1,5 @@
 import React from 'react'
-import { useNavigate, useParams } from "react-router-dom";
-import { IProduct } from "../interfaces/IProduct";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import productService from "../services/product.service";
 const ProductDetails: React.FC = () => {
@@ -23,7 +22,7 @@ const ProductDetails: React.FC = () => {
         {product.categories.join(", ")}
       </div>
       <div className="buttons">
-        <button>Vuokraa</button>
+        <Link to="reservation"><button>Vuokraa</button></Link>
         <button onClick={() => navigate(-1)}>Palaa takaisin</button>
       </div>
     </div>

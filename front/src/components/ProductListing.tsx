@@ -5,6 +5,7 @@ import ProductsNavbar from "./Products.Navbar";
 import { Route, Routes } from "react-router-dom";
 import ProductDetails from "./Product.details";
 import ProductCards from "./Product.cards";
+import ProductReservation from "./Product.reservation";
 
 const ProductListing = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -54,6 +55,7 @@ const ProductListing = () => {
           <Routes>
             <Route path="/" element={<ProductCards filter={filters} products={products} />} />
             <Route path=":id" element={<ProductDetails />} />
+            <Route path=":id/reservation" element={<ProductReservation />} />
           </Routes>
         </section>
       </main>
