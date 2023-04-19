@@ -34,5 +34,4 @@ const Database = {
   },
   sequelize: sequelize
 };
-console.log("host", config.db.host, "port", config.db.port);
 export default Database;

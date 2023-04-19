@@ -12,4 +12,11 @@ const getById = async (id: string) => {
   const res = await apiService.get("reservations/" + id);
   return res.data;
 }
-export default { getAll, createReservation, getById };
+const updateReservation = async (payload: any) => {
+
+  const res = await apiService.put("reservations/" + payload.id, payload);
+  
+  return res.data;
+}
+
+export default { getAll, createReservation, getById, updateReservation };

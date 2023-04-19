@@ -15,7 +15,6 @@ const AddUser = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const result = await UserService.createUser(user);
-    console.log(typeof result)
   }
   return (
     <form onSubmit={onSubmit}>

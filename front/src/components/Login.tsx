@@ -14,7 +14,6 @@ const Login = () => {
   const login = useMutation(async (payload: ILogin) => await userService.login(payload),
     {
       onSuccess(data) {
-        console.error(data)
         if (data.status !== 200) {
           alert("Tapahtui virhe sisäänkirjautumisessa");
           setCredentials({email: "", password: ""});

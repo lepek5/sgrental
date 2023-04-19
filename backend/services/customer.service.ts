@@ -23,7 +23,6 @@ const createCustomer = async (payload: any) => {
     if (!user) {
       throw Error("Error creating new account");
     }
-    console.log(user.toJSON(), "uesr","hash", hash);
     const result = await Customer.create({...customer, userId: user.toJSON().id});
     if (!result) throw Error("Error creating new customer account");
     const response = {
@@ -33,7 +32,6 @@ const createCustomer = async (payload: any) => {
       },
       status: httpStatus.CREATED
     }
-    console.log("Final", response);
     return response;
   } catch (err) {
     throw err;

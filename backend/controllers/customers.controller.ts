@@ -23,7 +23,6 @@ const createCustomer = async (req: Request, res: Response, next: NextFunction)=>
 };
 const updateCustomer = async (req: Request, res: Response, next: NextFunction ) => {
   const { user, body } = req;
-  console.log("user", user, "body", body);
   try {
     const result = await customerService.updateCustomer(body);
     res.status(httpStatus.SUCCESS).json(result);

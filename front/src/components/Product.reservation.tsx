@@ -40,7 +40,6 @@ const ProductReservation = () => {
     } else {
       const isOk = confirm(confimString);
       if (isOk) {
-      console.log("USER", user);
         const request = {
           productId: product.id,
           customerId: user.id,
@@ -86,7 +85,6 @@ const ProductReservation = () => {
       }
       <button onClick={() => {
         handleSubmit();
-        console.error("Difference is ", days, "days");
       }}>Tee varaus</button>
       <button onClick={() => navigate(-1)}>Palaa takaisin</button>
     </div>

@@ -7,7 +7,6 @@ import { HtmlError } from "../utils/customErrors";
 const createReservation = async (req: Request, res: Response) => {
   const { body } = req;
   const result = await reservationService.createReservation(body);
-  console.log("Reservation controller", result);
 }
 const getAll = async (req: Request,res: Response) => {
   const result = await reservationService.getAll();
@@ -23,5 +22,14 @@ const getById = async (req: Request, res: Response, next: NextFunction) => {
   } catch (err) {
     next(err);
   }
+};
+const updateReservation = async (req: Request, res: Response, next: NextFunction) => {
+  const { body } = req;
+  try {
+    const result = await reservationService.updateReservation(body);
+    res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    next(err);
+  }
 }
-export default { createReservation, getAll, getById };
+export default { createReservation, getAll, getById, updateReservation };

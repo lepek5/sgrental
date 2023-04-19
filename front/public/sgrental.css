@@ -348,3 +348,18 @@ table#reservations td:hover {
   background-color: var(--green-alpha-2);
   transition: all 200ms linear;
 }
+
+.reservation-details {
+
+}
+.reservation-details ul {
+  list-style: none;
+}
+.reservation-details input[type=checkbox] {
+  font-size: 2rem;
+  color: red;
+  padding: 5rem;
+}
+.reservation-details input[type=checkbox]:checked {
+  color:rgb(0, 219, 117) !important;
+}

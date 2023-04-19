@@ -4,11 +4,11 @@ import { httpStatus } from "../utils/httpStatus";
 
 const errorHandler = (err: Error, _req: Request, res: Response, next: NextFunction) => {
   console.error("###############");
-  console.error(err.message);
-  console.error(err.name);
+  console.error("Message:", err.message);
+  console.error("Name:", err.name);
   console.error("Type", typeof err);
   console.error("###############");
-  var error = {message: "Jaa a, ei mitään käryä :D"+". Oisko toi " + err.message, status: httpStatus.INTERNAL};
+  var error = { message: "Jaa a, ei mitään käryä :D" + ". Oisko toi " + err.message, status: httpStatus.INTERNAL };
   if (err instanceof HtmlError) {
     var e = err;
     error = {

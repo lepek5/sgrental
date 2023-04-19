@@ -16,7 +16,7 @@ const ReservationsList = ({ reservations }: { reservations: IReservation[] }) =>
         {reservations.map((res, idx) => (
           <tr key={idx}>
             {Object.values(res).map((value, valueIdx) => (
-                <td key={`${idx}-${valueIdx}`}><Link to={`../${res.id}`}>{value}</Link></td>              
+                <td style={value === false ? {backgroundColor: "yellow"} : value === true ? {backgroundColor: "green"} : {}} key={`${idx}-${valueIdx}`}><Link to={`../${res.id}`}>{value}</Link></td>              
             ))}
           </tr>
         ))}

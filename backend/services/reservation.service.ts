@@ -43,11 +43,25 @@ const getById = async (id: string) => {
   } catch (err) {
     throw err;
   }
-}
+};
+
+const updateReservation = async (payload: any) => {
+  try {
+    const res = await Reservation.update(payload, {
+      where: {
+        id: payload.id
+      }
+    });
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
 
 
 export default {
   getAll,
   createReservation,
-  getById
+  getById,
+  updateReservation
 }

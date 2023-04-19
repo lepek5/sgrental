@@ -21,7 +21,7 @@ const updateCustomer = async (payload: any) => {
     const result = await apiService.put("customers", payload);
     return result.data;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 }
 export default { getAll, createCustomer, updateCustomer };
