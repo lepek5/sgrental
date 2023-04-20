@@ -3,8 +3,8 @@ services:
   sgr-frontend:
     build:
       context: ./front
-      dockerfile: ./Dockerfile
-    container_name: sgr-frontend
+      dockerfile: ./dev.Dockerfile
+    container_name: sgr-frontend-dev
     image: sgr-frontend
     depends_on:
       - sgr-backend
@@ -20,8 +20,8 @@ services:
   sgr-backend:
     build:
       context: ./backend
-      dockerfile: ./Dockerfile
-    container_name: sgr-backend
+      dockerfile: ./dev.Dockerfile
+    container_name: sgr-backend-dev
     image: sgr-backend
     restart: always
     depends_on:
@@ -34,7 +34,7 @@ services:
     ports:
       - "9001:9001"
   sgr-database:
-    container_name: sgr-database
+    container_name: sgr-database-dev
     image: mariadb
     restart: always
     env_file:

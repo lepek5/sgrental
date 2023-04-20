@@ -31,6 +31,7 @@ const ProductReservation = () => {
     return await productService.getById(id);
   });
   if (isLoading) return (<em>Ladataan..</em>);
+  if (!product) return (<em>Tuotetta ei löydy</em>);
   const confimString = `Haluatko vuokrata tuotteen \"${product.title}\" aikavälille ${new Date(reservation.start).toDateString()} - ${new Date(reservation.end).toDateString()} hintaan ${days*product.price} euroa?`
   const handleSubmit = async () => {
     if (days < 1) {
@@ -50,7 +51,6 @@ const ProductReservation = () => {
       }
     }
   }
-  if (!product) return (<em>Tuotetta ei löydy</em>);
   return (
     <div className="product-reservation">
       <h3>Vuokraa tuote</h3>

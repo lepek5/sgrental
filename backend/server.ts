@@ -10,12 +10,7 @@ import authHandler from "./middleware/authHandler";
 import cookieParser from "cookie-parser";
 import createUsers from "./utils/createInitUsers";
 const server = express();
-const origins = ["http://192.168.0.4:9000", "http://localhost:9000", "http://127.0.0.1:9000"]
-const corsOpts = {
-  origin: config.frontend.host
-}
 server.use(express.json());
-
 server.use(cors({
   origin: config.frontend.host,
   credentials: true
