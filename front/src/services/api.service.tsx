@@ -1,7 +1,5 @@
 import axios from "axios";
 import Config from "../config";
-import { Storage } from "../utils/helpers";
-const user = Storage("get", "user");
 const apiService = axios.create({
   baseURL: Config.API.URI,
   withCredentials: true,

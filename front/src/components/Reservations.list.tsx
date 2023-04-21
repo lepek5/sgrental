@@ -3,6 +3,7 @@ import { IReservation } from "../interfaces/IReservation"
 import { Link } from "react-router-dom"
 
 const ReservationsList = ({ reservations }: { reservations: IReservation[] }) => {
+  if (!reservations || reservations.length < 1) return <>Ei löydy varauksia</>
   return (
     <table id="reservations">
       <thead>

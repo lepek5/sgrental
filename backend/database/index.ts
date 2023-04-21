@@ -2,6 +2,7 @@ import "ts-node/register";
 import { Sequelize } from "sequelize";
 import { SequelizeStorage, Umzug } from "umzug";
 import config from "../config";
+console.log("config.db.password", config.db.password)
 const sequelize = new Sequelize({
   host: config.db.host,
   port: config.db.port,
@@ -12,11 +13,13 @@ const sequelize = new Sequelize({
 });
 const Database = {
   connect: async () => {
+    console.log("config.db.password", config.db.password)
     try {
       await sequelize.authenticate();
       console.log("Sequelize", "Connection to database established.");
     } catch (err) {
-      console.error("Sequelize", err);
+      console.error("config.db.password", config.db.password)
+      console.error("Sequelize!!!! ERROR!!!!", err);
     }
   },
   disconnect: async () => await sequelize.close(),

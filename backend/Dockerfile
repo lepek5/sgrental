@@ -1,8 +1,8 @@
-FROM node:alpine
+FROM node:alpine AS builder
 WORKDIR /usr/src/app
 COPY ./package*.json ./
-COPY . .
 RUN npm install
+COPY . .
 EXPOSE 9001
-ENV NODE_ENV=development 
-CMD npm run start
+ENV NODE_ENV=production
+CMD ["npm", "run", "start"]

@@ -45,7 +45,6 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
       - ./database/my.cnf:/etc/mysql/my.cnf
     networks:
       - sgr-network

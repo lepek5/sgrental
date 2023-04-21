@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "start": "tsc && node dist/index.js"
+    "start": "npx tsc && node dist/index.js",
+    "build": "npx tsc --build"
   },
   "author": "jari mikkonn",
   "license": "ISC",
@@ -21,8 +22,7 @@
     "mariadb": "^3.1.1",
     "sequelize": "^6.31.0",
     "sequelize-typescript": "^2.1.5",
-    "umzug": "^3.2.1",
-    "typescript": "^5.0.3"
+    "umzug": "^3.2.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

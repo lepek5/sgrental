@@ -5,6 +5,10 @@ dotenv.config();
 const SaltRounds = 10
 const Secret = process.env.SECRET || "lentaevaekalakukko";
 const isDevelopment = process.env.NODE_ENV === "development";
+console.error("###########")
+console.error("###########")
+console.error("###########")
+console.error("VITTU", process.env.DB_PW_REMOTE)
 const config = {
   express: {
     port: isDevelopment ? Number(process.env.EXPRESS_PORT_LOCAL) : Number(process.env.EXPRESS_PORT_REMOTE),
@@ -15,10 +19,10 @@ const config = {
     port: isDevelopment ? Number(process.env.DB_PORT_LOCAL) : Number(process.env.DB_PORT_REMOTE),
     user: isDevelopment ? process.env.DB_USER_LOCAL : process.env.DB_USER_REMOTE,
     database: isDevelopment ? process.env.DB_DATABASE_LOCAL : process.env.DB_DATABASE_REMOTE,
-    password: isDevelopment ? process.env.DB_PW_LOCAL : process.env.EXPRESS_PORT_REMOTE
+    password: process.env.DB_PASSWORD
   },
   frontend: {
-    host: process.env.FRONTEND_URI
+    host: isDevelopment ? process.env.FRONTEND_URI : process.env.FRONTEND_URI_REMOTE
   },
   utils: {
     generateRandomPassword: async () => (new Date().getTime()).toString(36),
