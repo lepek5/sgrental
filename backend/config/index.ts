@@ -5,10 +5,6 @@ dotenv.config();
 const SaltRounds = 10
 const Secret = process.env.SECRET || "lentaevaekalakukko";
 const isDevelopment = process.env.NODE_ENV === "development";
-console.error("###########")
-console.error("###########")
-console.error("###########")
-console.error("VITTU", process.env.DB_PW_REMOTE)
 const config = {
   express: {
     port: isDevelopment ? Number(process.env.EXPRESS_PORT_LOCAL) : Number(process.env.EXPRESS_PORT_REMOTE),
