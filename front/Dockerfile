@@ -1,8 +1,8 @@
-FROM node:15-alpine AS builder
+FROM node:15-alpine AS frontend-builder
 
 WORKDIR /usr/src/app
 
-COPY package.json package.json
+COPY package*.json .
 
 RUN npm install
 
@@ -10,17 +10,15 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:alpine AS frontend-prod
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/share/nginx/html
 
-RUN rm -rf *
-
 # Expose port
 EXPOSE 9000
 
-COPY --from=builder /usr/src/app/dist .
+COPY --from=frontend-builder /usr/src/app/dist .
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
