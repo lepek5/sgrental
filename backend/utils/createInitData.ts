@@ -1,24 +1,40 @@
 import { ICustomer } from "../interfaces/ICustomer";
 import { IProduct } from "../interfaces/IProduct";
+import { IReservation } from "../interfaces/IReservation";
 import customerService from "../services/customer.service"
 import employeeService from "../services/employee.service";
 import productService from "../services/product.service";
+import reservationService from "../services/reservation.service";
 import userService from "../services/user.service";
 
 const createUsers = async () => {
   const users = await userService.getAll();
   if (users.length < 1 || !users) {
-    const customer = await customerService.createCustomer({
-      name: "Käyttäjä",
+    const customer1 = await customerService.createCustomer({
+      name: "Käyttäjä Yksi",
       email: "user",
-      address: "Osoite",
-      phone: "715517",
-      date_of_birth: "06-06-1666",
+      address: "Käyttäjänkuja 1",
+      phone: "015155155",
+      date_of_birth: "04-20-1956",
       password: "sala"
     });
-    const employee = await employeeService.createEmployee({
-      name: "Työntekijä",
+    const customer2 = await customerService.createCustomer({
+      name: "Käyttäjä Kaksi",
+      email: "user2",
+      address: "Käyttäjänkuja 2",
+      phone: "015511511",
+      date_of_birth: "02-04-1992",
+      password: "sala"
+    });
+    const employee1 = await employeeService.createEmployee({
+      name: "Työntekijä Yksi",
       email: "employee",
+      phone: "0700 12341234",
+      password: "sala"
+    });
+    const employee2 = await employeeService.createEmployee({
+      name: "Työntekijä Kaksi",
+      email: "employee2",
       phone: "0700 12341234",
       password: "sala"
     });
@@ -61,4 +77,47 @@ const createProducts = async () => {
     console.log("Products created.")
   }
 }
-export { createUsers, createProducts };
+const createReservations = async () => {
+  const reservations: IReservation[] = await reservationService.getAll();
+  if (reservations.length < 1 || !reservations) {
+    const reservation1: IReservation = await reservationService.createReservation({
+      productId: 2,
+      customerId: 1,
+      employeeId: null,
+      startAt: formatDate(new Date(getDateAfterDays(2))),
+      endAt: formatDate(new Date(getDateAfterDays(7))),
+      confirmed: false,
+      completed: false
+    });
+    const reservation2: IReservation = await reservationService.createReservation({
+      productId: 3,
+      customerId: 2,
+      employeeId: 1,
+      startAt: formatDate(new Date(getDateAfterDays(2))),
+      endAt: formatDate(new Date(getDateAfterDays(6))),
+      confirmed: true,
+      completed: false
+    });
+    console.log("Initial reservations created.");
+  }
+};
+const formatDate = (date: Date): string => {
+  /**
+   * Return date as mm-dd-yyyy
+   */
+  //let date = new Date(payload)
+  let day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+  let month = 1 + date.getMonth() > 9 ? 1 + date.getMonth() : `0${1 + date.getMonth()}`;
+  let year = date.getFullYear();
+  return `${month}-${day}-${year}`;
+};
+const getDateAfterDays = (days: number) => {
+  /**
+   * Return milliseconds based on days after today
+   */
+  const date = Date.now();
+  const SECONDS_IN_DAY = 1000*60*60*24;
+  console.log("date", formatDate(new Date(date + (SECONDS_IN_DAY * days))));
+  return date + (SECONDS_IN_DAY * days);
+}
+export { createUsers, createProducts, createReservations };

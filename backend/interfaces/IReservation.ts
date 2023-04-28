@@ -1,11 +1,10 @@
 export interface IReservation {
   id?: number,
-  product_id: number,
-  user_id: number,
-  employee_id: number,
-  created_at?: string,
-  start_at: string,
-  end_at?: string,
+  productId: number,
+  customerId: number,
+  employeeId: number | null,
+  startAt: string,
+  endAt: string,
   confirmed: boolean,
   completed: boolean,
 }

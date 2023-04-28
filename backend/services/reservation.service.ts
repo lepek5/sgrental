@@ -7,7 +7,7 @@ import User from "../models/user";
 import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
 
-const getAll = async () => {
+const getAll = async (): Promise<IReservation | any> => {
   try {
     const result = await Reservation.findAll();
     return result;
@@ -15,9 +15,9 @@ const getAll = async () => {
     throw err;
   }
 };
-const createReservation = async (payload: any): Promise<IReservation | any> => {
+const createReservation = async (payload: IReservation): Promise<IReservation | any> => {
   try {
-    const result = await Reservation.create(payload);
+    const result = await Reservation.create({...payload});
     if (result) return result;
   } catch (err) {
     throw err;
