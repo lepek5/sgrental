@@ -109,7 +109,7 @@ const formatDate = (date: Date): string => {
   let day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
   let month = 1 + date.getMonth() > 9 ? 1 + date.getMonth() : `0${1 + date.getMonth()}`;
   let year = date.getFullYear();
-  return `${month}-${day}-${year}`;
+  return `${year}-${month}-${day}`;
 };
 const getDateAfterDays = (days: number) => {
   /**

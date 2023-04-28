@@ -23,6 +23,7 @@ const ProductReservation = () => {
   }
   useEffect(() => {
     const { start, end } = reservation;
+    console.log("start", start, "date", new Date(start), "end")
     const difference = new Date(end).getTime() - new Date(start).getTime();
     setDays(parseDayDifference(difference));
   }, [reservation]);

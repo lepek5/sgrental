@@ -57,11 +57,30 @@ const updateReservation = async (payload: any) => {
     throw err;
   }
 };
-
+const getByCustomerId = async (id: string) => {
+  try {
+    const reservations = await Reservation.findAll({
+      nest: true,
+      where: {
+        customerId: id
+      },
+      attributes: ["startAt", "endAt", "completed", "confirmed"],
+      include: [{
+        model: Product,
+        attributes: ["title", "price"]
+      }]
+      
+    });
+    return reservations;
+  } catch (err) {
+    throw err;
+  }
+}
 
 export default {
   getAll,
   createReservation,
   getById,
-  updateReservation
+  updateReservation,
+  getByCustomerId
 }

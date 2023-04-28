@@ -4,6 +4,7 @@ import UserService from "../services/user.service";
 import AddReservation from "../components/addReservation";
 import UserDetailsDash from "../components/UserDetails.dash";
 import UserDetails from "../components/UserDetails";
+import CustomerReservations from "../components/Customer.reservations";
 
 const UserDetailsPage = () => {
   return (
@@ -17,7 +18,7 @@ const UserDetailsPage = () => {
         <Routes>
           <Route path="/" element={<UserDetailsDash />} />
           <Route path="details" element={<UserDetails />} />
-          <Route path="reservations" element={<AddReservation />} />
+          <Route path="reservations" element={<CustomerReservations />} />
         </Routes>
       </section>
     </main>
