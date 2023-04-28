@@ -15,7 +15,7 @@ const createUsers = async () => {
       email: "user",
       address: "Käyttäjänkuja 1",
       phone: "015155155",
-      date_of_birth: "04-20-1956",
+      date_of_birth: "1956-04-20",
       password: "sala"
     });
     const customer2 = await customerService.createCustomer({
@@ -23,7 +23,7 @@ const createUsers = async () => {
       email: "user2",
       address: "Käyttäjänkuja 2",
       phone: "015511511",
-      date_of_birth: "02-04-1992",
+      date_of_birth: "1992-02-14",
       password: "sala"
     });
     const employee1 = await employeeService.createEmployee({

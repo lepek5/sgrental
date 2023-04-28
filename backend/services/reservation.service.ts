@@ -67,7 +67,7 @@ const getByCustomerId = async (id: string) => {
       attributes: ["startAt", "endAt", "completed", "confirmed"],
       include: [{
         model: Product,
-        attributes: ["title", "price"]
+        attributes: ["title", "price", "id"]
       }]
       
     });
