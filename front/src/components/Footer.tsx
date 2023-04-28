@@ -1,11 +1,16 @@
 import React from "react";
 
 const Footer = () => {
-  return(
+  return (
     <>
-    <footer>
-      Urheiluvälinevuokraus
-    </footer>
+      <footer>
+        <div className="top">
+          <p>Ota yhteyttä!</p>
+        </div>
+        <div className="bottom">
+          Urheiluvälinevuokraamo Oy (c) {new Date().getFullYear()}
+        </div>
+      </footer>
     </>
   )
 };

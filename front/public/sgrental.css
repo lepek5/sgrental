@@ -28,7 +28,7 @@
   --greenwhite: #e3fcff;
   --white: rgb(250, 251, 255);
   --header-height: 4rem;
-  --footer-height: 2rem;
+  --footer-height: 4rem;
   --navigator-height: 2.5rem;
   --font-montressant: "Lato", sans-serif;
 }
@@ -57,22 +57,21 @@ h3 {
   color: var(--must-blue);
   padding-bottom: 1rem;
 }
-footer {
-  width: 100%;
-  position: sticky;
-}
 body {
   min-height: 100%;
   background-color: var(--white);
 }
 main {
-  position: absolute;
   margin-bottom: 5rem;
   height: 100%;
   width: 100%;
   overflow: auto;
 }
 footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -97,6 +96,7 @@ header {
 #content {
   min-height: 100%;
   padding: 1rem;
+  flex-wrap: wrap;
 }
 #nav-items {
   width: 100%;
