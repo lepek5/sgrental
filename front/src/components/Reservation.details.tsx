@@ -41,7 +41,8 @@ const ReservationDetails: React.FC = () => {
       startAt: reservation.startAt,
       confirmed: status.confirmed,
       completed: status.completed,
-      employeeId: user.id
+      employeeId: user.id,
+      productId: id
     }
     update.mutateAsync(request);
   }
