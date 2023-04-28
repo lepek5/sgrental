@@ -17,6 +17,16 @@ const ProductReservation = () => {
   const parseDayDifference = (difference: number) => {
     return Math.ceil(difference / (1000 * 3600 * 24));
   }
+  const formatDate = (date: Date): string => {
+    /**
+     * Return date as mm-dd-yyyy
+     */
+    //let date = new Date(payload)
+    let day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+    let month = 1 + date.getMonth() > 9 ? 1 + date.getMonth() : `0${1 + date.getMonth()}`;
+    let year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  };
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { id: key, value } = event.target;
     setReservation(res => ({ ...res, [key]: value }));
@@ -45,8 +55,8 @@ const ProductReservation = () => {
         const request = {
           productId: product.id,
           customerId: user.id,
-          startAt: reservation.start,
-          endAt: reservation.end
+          startAt: formatDate(new Date(reservation.start)),
+          endAt: formatDate(new Date(reservation.end))
         }
         const result = await reservationService.createReservation(request); 
       }

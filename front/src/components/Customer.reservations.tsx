@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from "react-query";
 import reservationService from "../services/reservation.service";
 import { IReservation } from "../interfaces/IReservation";
+import { Link } from "react-router-dom";
 
 const CustomerReservations = () => {
   const { data: reservations, isLoading } = useQuery<IReservation[] | any[]>("reservations", async () => {
@@ -31,7 +32,7 @@ const CustomerReservations = () => {
             console.log("start", startAt, "newdate", new Date(startAt) ,"days", days, "firre", dateDifference)
             return (
               <tr key={`${idx}`}>
-                <td>{product.title}</td>
+                <td><Link to={`/products/${product.id}`}>{product.title}</Link></td>
                 <td>{product.price * days} ({product.price})</td>
                 <td>{startAt}</td>
                 <td>{endAt}</td>
