@@ -18,7 +18,7 @@ const addProduct = async (req: Request, res: Response, next: NextFunction) => {
     return;
   }
   try {
-    const result = await ProductService.addProduct(body);
+    const result = await ProductService.createProduct(body);
     res.status(httpStatus.CREATED).json(result);
   } catch (err) {
     next(err);

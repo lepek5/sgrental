@@ -1,7 +1,8 @@
 import categoryService from "./category.service";
 import { Product, Category, ProductDetail } from "../models";
+import { IProduct } from "../interfaces/IProduct";
 const ProductService = {
-  getAll: async () => {
+  getAll: async (): Promise<IProduct[] | any> => {
     try {
       const result = await Product.findAll({
         nest: true,
@@ -37,13 +38,13 @@ const ProductService = {
       return error;
     }
   },
-  addProduct: async (payload: any): Promise<any> => {
+  createProduct: async (payload: IProduct): Promise<any> => {
     const { categories, ...product } = payload;
     try {
       const result = await Product.create(product);
       if (result) {
         const { id: productId } = result.toJSON();
-        categories.forEach(async (value: any) => {
+        categories?.forEach(async (value: any) => {
           try {
             const cat = await categoryService.createCategory(value);
             const { id: categoryId } = cat;
