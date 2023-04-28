@@ -20,6 +20,14 @@ services:
     container_name: sgr-backend
     image: sgr-backend
     restart: always
+    env_file:
+      - .env
+    environment:
+      - FRONTEND_URI=${FRONTEND_URI}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       - sgr-database
     networks:
