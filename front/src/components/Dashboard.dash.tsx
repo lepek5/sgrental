@@ -1,10 +1,14 @@
-import React, { useContext } from 'react'
-import { useQuery, useQueryClient } from "react-query";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../utils/use-auth";
 
 const Dashboard = () => {
-  const user = useContext(UserContext);
+  const navigate = useNavigate();
+  const user = useContext(UserContext) && {type: "customer"};
+  useEffect(() => {
+    if (user === undefined) navigate("/");
+  },[]);
+  if (user === undefined) return <>Käyttäjäkonteksti on tyhjä..</>
   return (
     <main id="dashboard">
       <h2>Hallintapaneeli</h2>
@@ -41,7 +45,7 @@ const Dashboard = () => {
                 <>
                   <Link to="user/details"><button className="link-button">Omat tiedot</button></Link>
                   <Link to="user/reservations"><button className="link-button">Omat varaukset</button></Link>
-                  
+
                 </>
               )
           }
