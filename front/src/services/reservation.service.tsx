@@ -6,7 +6,7 @@ const getAll = async (): Promise<IReservation[] | any> => {
 }
 const createReservation = async (payload: any) => {
   const res = await apiService.post("reservations", payload);
-  return res.data;
+  return res;
 };
 const getById = async (id: string) => {
   const res = await apiService.get("reservations/" + id);

@@ -33,34 +33,43 @@ const ProductReservation = () => {
   }
   useEffect(() => {
     const { start, end } = reservation;
-    console.log("start", start, "date", new Date(start), "end")
     const difference = new Date(end).getTime() - new Date(start).getTime();
     setDays(parseDayDifference(difference));
   }, [reservation]);
-  
+
   const { data: product, isLoading } = useQuery(["products", id], async () => {
     return await productService.getById(id);
   });
   if (isLoading) return (<em>Ladataan..</em>);
   if (!product) return (<em>Tuotetta ei löydy</em>);
-  const confimString = `Haluatko vuokrata tuotteen \"${product.title}\" aikavälille ${new Date(reservation.start).toDateString()} - ${new Date(reservation.end).toDateString()} hintaan ${days*product.price} euroa?`
+  const confimString = `Haluatko vuokrata tuotteen \"${product.title}\" aikavälille ${new Date(reservation.start).toDateString()} - ${new Date(reservation.end).toDateString()} hintaan ${days * product.price} euroa?`
   const handleSubmit = async () => {
-    if (days < 1) {
-      alert("Minimivuokra-aika on 1 vuorokausi!");
-    } else if (new Date().getTime() > new Date(reservation.start).getTime()) {
-      alert("Et voi varata menneisyydestä!")
+    if (!user) {
+      alert("Sinulla täytyy olla käyttäjätunnus luotuna voidaksesi varata tuotteita")
     } else {
-      const isOk = confirm(confimString);
-      if (isOk) {
-        const request = {
-          productId: product.id,
-          customerId: user.id,
-          startAt: formatDate(new Date(reservation.start)),
-          endAt: formatDate(new Date(reservation.end))
+      if (days < 1) {
+        alert("Minimivuokra-aika on 1 vuorokausi!");
+      } else if (new Date().getTime() > new Date(reservation.start).getTime()) {
+        alert("Et voi varata menneisyydestä!")
+      } else {
+        const isOk = confirm(confimString);
+        if (isOk) {
+          const request = {
+            productId: product.id,
+            customerId: user.id,
+            startAt: formatDate(new Date(reservation.start)),
+            endAt: formatDate(new Date(reservation.end))
+          }
+          const result = await reservationService.createReservation(request);
+          if (result.status == 200) {
+            alert("Varaus luotu! Voit katsoa omia varaustietoja omasta hallintapaneelista.");
+          } else {
+            alert("Tapahtui virhe varauksessa. Koeta uudelleen");
+          }
         }
-        const result = await reservationService.createReservation(request); 
       }
     }
+
   }
   return (
     <div className="product-reservation">
@@ -89,7 +98,7 @@ const ProductReservation = () => {
           <div className="summary">
             Yhteensä <strong>{days}</strong> vuorokautta.<br />
             <div className="total-price">
-            Hinta yhteensä <strong>{product.price * days}</strong> euroa.
+              Hinta yhteensä <strong>{product.price * days}</strong> euroa.
             </div>
           </div>
         ) : (<></>)

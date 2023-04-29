@@ -5,9 +5,15 @@ import { httpStatus } from "../utils/httpStatus";
 import { HtmlError } from "../utils/customErrors";
 import customerService from "../services/customer.service";
 
-const createReservation = async (req: Request, res: Response) => {
+const createReservation = async (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
-  const result = await reservationService.createReservation(body);
+  try {
+    const result = await reservationService.createReservation(body);
+    return res.status(httpStatus.SUCCESS).json(result);
+  } catch (err) {
+    next(err);
+  }
+
 }
 const getAll = async (req: Request,res: Response) => {
   const result = await reservationService.getAll();
