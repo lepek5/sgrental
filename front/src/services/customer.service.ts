@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { ICustomer } from "../interfaces/ICustomer";
 import apiService from "./api.service";
 const getAll = async () => {
@@ -5,7 +6,7 @@ const getAll = async () => {
     const result = await apiService.get("customers");
     return result.data;
   } catch (err) {
-    throw err;
+    throw err.response.data;
   }
 }
 const createCustomer = async (payload: ICustomer) => {
@@ -13,7 +14,7 @@ const createCustomer = async (payload: ICustomer) => {
     const result = await apiService.post("customers", payload);
     return result.data;
   } catch (err) {
-    throw err
+    throw err.response.data;
   }
 };
 const updateCustomer = async (payload: any) => {
@@ -21,7 +22,7 @@ const updateCustomer = async (payload: any) => {
     const result = await apiService.put("customers", payload);
     return result.data;
   } catch (err) {
-    throw err;
+    throw err.response.data;
   }
 }
 export default { getAll, createCustomer, updateCustomer };

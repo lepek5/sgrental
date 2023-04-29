@@ -2,9 +2,12 @@ import React, { CSSProperties, useState } from 'react'
 import { useMutation, useQueryClient } from "react-query";
 import customerService from "../services/customer.service";
 import { ICustomer, ICustomerRegister } from "../interfaces/ICustomer";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [notification, setNotification] = useState("");
   const [customer, setCustomer] = useState<ICustomerRegister>({
     name: "",
@@ -19,12 +22,19 @@ const Register = () => {
     return await customerService.createCustomer(payload)
   },
     {
+      onError(error, variables, context) {
+        if (error === "Value must be unique") {
+          alert("Sähköpostiosoite on jo käytössä!");
+        }
+      },
       onSuccess: ({ data }) => {
         queryClient.invalidateQueries("customers");
-        setNotification(`Käyttäjätunnus luotu sähköpostilla ${data.email} ja salasanalla ${data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
+        alert("Käyttäjätunnus luotu! Sinut ohjataan kirjautumissivulle.");
+        //setNotification(`Käyttäjätunnus luotu sähköpostilla ${data.email} ja salasanalla ${data.password}. Voit vaihtaa salasanasi käyttäjäpaneelista.`);
         setTimeout(() => {
-          setNotification("");
-        }, 5000);
+          //setNotification("");
+          navigate("/login");
+        }, 2000);
       }
     });
 
@@ -43,7 +53,7 @@ const Register = () => {
   return (
     <main id="register">
       <nav id="dashboard-nav"></nav>
-        <h2>Luo uusi käyttäjätunnus</h2>
+      <h2>Luo uusi käyttäjätunnus</h2>
       <section id="content">
         <form onSubmit={onSubmit}>
           <div className="form-item">

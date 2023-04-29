@@ -16,6 +16,7 @@ const createCustomer = async (req: Request, res: Response, next: NextFunction)=>
   const { body } = req;
   try {
     const result = await customerService.createCustomer(body);
+    console.log("create user", result)
     res.status(result.status).json(result);
   } catch (err) {
     next(err);

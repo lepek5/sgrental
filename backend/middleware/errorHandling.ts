@@ -22,7 +22,7 @@ const errorHandler = (err: Error, _req: Request, res: Response, next: NextFuncti
       status: httpStatus.CONFLICT
     };
   }
-  res.status(error.status).json(error);
+  res.status(error.status).json(error.message);
 }
 
 export default errorHandler;

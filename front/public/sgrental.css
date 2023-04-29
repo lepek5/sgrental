@@ -195,14 +195,17 @@ header {
 .modal {
   border-radius: 0.5rem;
   position: fixed;
-  border: 3px solid var(--must-blue);
+  top: 40vh;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: var(--must-blue);
+  border: 15px solid var(--must-blue);
   z-index: 5;
   top: calc(var(--header-height) + var(--navigator-height) + 1rem);
   margin-left: 10vw;
   transition: all 500ms linear;
   box-shadow: 0 0 15px rgba(var(--bluewhite), 0.5);
-  background-color: rgb(177, 11, 11);
-  background: linear-gradient(72deg, var(--bluegreen), var(--white));
+  background-color: var(--bluewhite);
   width: 80vw;
   height: 50vh;
   visibility: visible;

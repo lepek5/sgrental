@@ -28,6 +28,7 @@ const userService = {
   createUser: async (payload: any) => {
     try {
       const result = await User.create(payload);
+      console.log("create user", result)
       return result.toJSON();
     } catch (err) {
       throw err;
