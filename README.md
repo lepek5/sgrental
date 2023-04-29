@@ -1,5 +1,6 @@
-#Sports Gear Rental
-School project
--Express
--React
--MariaDB
+# Sports Gear Rental
+School project with docker
+- TypeScript
+- React
+- Express
+- MariaDB
