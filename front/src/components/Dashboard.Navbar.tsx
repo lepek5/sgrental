@@ -1,11 +1,10 @@
 import React from "react";
-import { useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import { getUser } from "../utils/helpers";
 
 const DashboardNavbar = () => {
   const user = getUser();
-  if (!user) return (<p>...</p>);
+  if (!user) return (<p>Lataan</p>);
   return (
     <nav id="dashboard-nav">
       <ul id="nav-items" className="dashboard-nav">

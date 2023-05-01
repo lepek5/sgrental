@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { ILogin } from "../interfaces/ILogin";
 import userService from "../services/user.service";
 import { useMutation, useQueryClient } from "react-query";
-import { Storage } from "../utils/helpers";
 import { useNavigate } from "react-router";
 
 const Login = () => {

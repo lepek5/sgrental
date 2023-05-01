@@ -5,7 +5,6 @@ import Api from "./routes";
 import errorHandler from "./middleware/errorHandling";
 import Database from "./database";
 import authHandler from "./middleware/authHandler";
-import cookieParser from "cookie-parser";
 import { createUsers, createProducts, createReservations } from "./utils/createInitData";
 const server = express();
 server.use(express.json());
@@ -13,7 +12,6 @@ server.use(cors({
   origin: config.frontend.host,
   credentials: true
 }));
-server.use(cookieParser());
 server.use(authHandler);
 server.use("/api", Api);
 server.use(errorHandler);
