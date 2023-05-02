@@ -2,5 +2,6 @@
 /**/dist
 /**/*.env
 /**/*.sh
-/**/*.sql
 /**/*.vscode
+*.sql
+!/database/backup.sql
