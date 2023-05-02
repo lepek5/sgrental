@@ -16,7 +16,6 @@ const createCustomer = async (req: Request, res: Response, next: NextFunction)=>
   const { body } = req;
   try {
     const result = await customerService.createCustomer(body);
-    console.log("create user", result)
     res.status(result.status).json(result);
   } catch (err) {
     next(err);
@@ -28,7 +27,7 @@ const updateCustomer = async (req: Request, res: Response, next: NextFunction ) 
     const result = await customerService.updateCustomer(body);
     res.status(httpStatus.SUCCESS).json(result);
   } catch (err) {
-    throw err;
+    next(err);
   }
 };
 export default { getAll, createCustomer, updateCustomer };

@@ -25,7 +25,6 @@ const login = async (email: string, password: string) => {
 const createUser = async (payload: any) => {
   try {
     const result = await User.create(payload);
-    console.log("create user", result)
     return result.toJSON();
   } catch (err) {
     throw err;

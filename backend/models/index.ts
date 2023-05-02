@@ -24,6 +24,6 @@ Reservation.belongsTo(Customer, {
 Product.hasMany(Reservation, {
   foreignKey: "productId"
 });
-Customer.hasMany(Reservation, {  foreignKey: "customerId"});
+Customer.hasMany(Reservation, { foreignKey: "customerId" });
 
 export { Product, Category, ProductDetail };

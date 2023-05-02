@@ -8,8 +8,7 @@ const CustomerReservations = () => {
   const { data: reservations, isLoading } = useQuery<IReservation[] | any[]>("reservations", async () => {
     return await reservationService.getByCustomer();
   });
-  if (isLoading) return <>Lataan paskaa...</>
-  console.log("reservations", reservations)
+  if (isLoading) return <>Lataan...</>
   return (
     <div>
       <h3>Omat varaukset</h3>
@@ -29,7 +28,6 @@ const CustomerReservations = () => {
             const {startAt, endAt, completed, confirmed, product } = reservation;
             const dateDifference = new Date(endAt).getTime() - new Date(startAt).getTime();
             const days = Math.ceil(dateDifference / (1000 * 3600 * 24));
-            console.log("start", startAt, "newdate", new Date(startAt) ,"days", days, "firre", dateDifference)
             return (
               <tr key={`${idx}`}>
                 <td><Link to={`/products/${product.id}`}>{product.title}</Link></td>

@@ -18,10 +18,8 @@ const getAll = async (): Promise<IReservation | any> => {
   }
 };
 const createReservation = async (payload: IReservation): Promise<IReservation | any> => {
-  console.log("Reservaton payload", payload)
   try {
     const result = await Reservation.create({...payload});
-    console.log("Creating reservation", result);
     if (result) return result;
   } catch (err) {
     throw err;

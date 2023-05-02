@@ -41,8 +41,6 @@ const updateReservation = async (req: Request, res: Response, next: NextFunction
 };
 const getByCustomer = async (req: Request, res: Response, next: NextFunction) => {
   const { user } = req;
-  const { id } = req.params;
-  console.log("Controller", user);
   if (!user) return res.status(httpStatus.NOT_FOUND).json({error: "User not found"});
   try {
     const customer = await customerService.getCustomerByUserId(user.toJSON().id);

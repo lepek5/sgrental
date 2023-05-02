@@ -117,7 +117,6 @@ const getDateAfterDays = (days: number) => {
    */
   const date = Date.now();
   const SECONDS_IN_DAY = 1000*60*60*24;
-  console.log("date", formatDate(new Date(date + (SECONDS_IN_DAY * days))));
   return date + (SECONDS_IN_DAY * days);
 }
 export { createUsers, createProducts, createReservations };
