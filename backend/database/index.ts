@@ -13,6 +13,7 @@ const Database = {
   connect: async () => {
     try {
       await sequelize.authenticate();
+      sequelize.sync();
       console.log("Sequelize", "Connection to database established.");
     } catch (err) {
     }

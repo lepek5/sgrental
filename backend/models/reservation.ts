@@ -8,14 +8,26 @@ Reservation.init({
     autoIncrement: true
   },
   productId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    references: {
+      model: "products",
+      key: "id"
+    }
   },
   customerId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    references: {
+      model: "customers",
+      key: "id"
+    }
   },
   employeeId: {
     type: DataTypes.INTEGER,
-    defaultValue: null
+    defaultValue: null,
+    references: {
+      model: "employees",
+      key: "id"
+    }
   },
   startAt: {
     type: DataTypes.STRING

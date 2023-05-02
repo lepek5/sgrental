@@ -46,6 +46,7 @@ const ReservationDetails: React.FC = () => {
     }
     update.mutateAsync(request);
   }
+  console.log("reservations", reservation)
   return (
     <div className="reservation-details">
       <div className="id">

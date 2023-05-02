@@ -15,13 +15,15 @@ Product.belongsToMany(Category, {
 Category.belongsToMany(Product, {
   through: ProductDetail
 })
-Reservation.hasOne(Product, {
-  foreignKey: "id"
+Reservation.belongsTo(Product, {
+  foreignKey: "productId"
 });
-Reservation.hasOne(Customer, {
-  foreignKey: "id"
+Reservation.belongsTo(Customer, {
+  foreignKey: "customerId"
 });
-Product.belongsTo(Reservation, {  foreignKey: "id"});
-Customer.belongsTo(Reservation, {  foreignKey: "id"});
+Product.hasMany(Reservation, {
+  foreignKey: "productId"
+});
+Customer.hasMany(Reservation, {  foreignKey: "customerId"});
 
 export { Product, Category, ProductDetail };

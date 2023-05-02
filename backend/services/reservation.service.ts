@@ -6,6 +6,8 @@ import Reservation from "../models/reservation";
 import User from "../models/user";
 import { HtmlError } from "../utils/customErrors";
 import { httpStatus } from "../utils/httpStatus";
+import { Op } from "sequelize";
+
 
 const getAll = async (): Promise<IReservation | any> => {
   try {
@@ -16,6 +18,7 @@ const getAll = async (): Promise<IReservation | any> => {
   }
 };
 const createReservation = async (payload: IReservation): Promise<IReservation | any> => {
+  console.log("Reservaton payload", payload)
   try {
     const result = await Reservation.create({...payload});
     console.log("Creating reservation", result);
@@ -33,8 +36,12 @@ const getById = async (id: string) => {
       },
       {
         model: Customer,
+        attributes: ["user_id", "name"],
         include: [{
           model: User,
+          where: {
+            id: {[Op.col]: "customer.user_id"}
+          },
           attributes: ["id", "email"]
         }]
       }]
