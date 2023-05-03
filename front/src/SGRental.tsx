@@ -10,6 +10,8 @@ import Products from "./components/ProductListing";
 import LoginPage from "./pages/Login.page";
 import Logout from "./components/Logout";
 import Register from "./components/Register";
+import Contact from "./components/Contact";
+import ContactPage from "./pages/Contact.page";
 
 const SGRental = () => {
   return (
@@ -23,6 +25,7 @@ const SGRental = () => {
             <Route path="dash/*" element={<DashboardPage />} />
             <Route path="employee" element={<EmployeePage />} />
             <Route path="products/*" element={<Products />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/" element={<LandingPage />} />
           </Routes>
         </Router>

@@ -45,7 +45,7 @@ const ProductListing = () => {
   const parseFilters = (filter: string) => {
     setFilters(filter);
   }
-  if (!products) return <h3>FUCK YOU! NOT PRODUCTS FOR YOU!</h3>
+  if (!products) return <h3>Lataan tuotteita..</h3>
   return (
     <>
       <main id="products">
