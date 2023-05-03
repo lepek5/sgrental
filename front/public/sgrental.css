@@ -366,3 +366,10 @@ table#reservations td:hover {
 .reservation-details input[type=checkbox]:checked {
   color:rgb(0, 219, 117) !important;
 }
+
+.main-nav {
+  transition: all 200ms ease-in-out;
+}
+.main-nav:hover {
+  transform: scale(1.1);
+}
