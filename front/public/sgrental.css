@@ -80,6 +80,11 @@ footer {
   height: var(--footer-height);
   box-shadow: 0 0 5px 0 var(--bluegreen);
 }
+footer .top {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
 header {
   width: 100%;
   display: flex;

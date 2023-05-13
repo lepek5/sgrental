@@ -7,7 +7,8 @@ const Product = ({ product }: { product: IProduct }) => {
   const handleModal = () => {
     setModalOpen(!modalOpen);
   }
-  if (!product) return <>no product</>
+  if (product instanceof Array) return <></>
+  if (!product) return <>no product or not viable</>
   return (
     <>
       <div onClick={handleModal} className={"card"} key={product.id}>

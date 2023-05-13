@@ -15,7 +15,8 @@ const Register = () => {
     email: "",
     address: "",
     dateOfBirth: "",
-    password: ""
+    password: "",
+    cPassword: ""
   });
 
   const createMutation = useMutation(async (payload: ICustomerRegister) => {
@@ -48,7 +49,11 @@ const Register = () => {
   }
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    createMutation.mutateAsync(customer);
+    if (customer.password != customer.cPassword) {
+      alert("Salasanat eivät täsmää");
+    } else {
+      createMutation.mutateAsync(customer);
+    }
   }
   return (
     <main id="register">
@@ -86,7 +91,7 @@ const Register = () => {
           </div>
           <div className="form-item">
             <label htmlFor="name">Vahvista salasana</label>
-            <input onChange={handleInputChange} type="password" id="password-confirm" name="password-confirm" />
+            <input onChange={handleInputChange} type="password" id="cPassword" name="cPassword" />
           </div>
           <button type="submit">Rekisteröi asiakas</button>
           <div style={notificationStyle} className={notification.length > 1 ? "modal" : ""} id="notification">{notification}</div>

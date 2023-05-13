@@ -8,5 +8,6 @@ export interface ICustomer {
   phone: string,
 }
 export interface ICustomerRegister extends ICustomer {
-  password: string
+  password: string;
+  cPassword: string;
 }

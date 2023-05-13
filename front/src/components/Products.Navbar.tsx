@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 interface Filter {
   id?: string,
@@ -21,12 +21,12 @@ const ProductsNavbar = ({ parseFilters }: { parseFilters: any }) => {
   const searchStyle = {
     display: "flex",
   }
+  useEffect(() => parseFilters(filter),[filter]);
   return (
     <nav id="dashboard-nav">
         <div style={searchStyle}>
             <input onChange={(e) => {
               setFilter(e.target.value);
-              parseFilters(e.target.value);
             }} style={inputStyle} value={filter} onBlur={() => setIsActive(false)} onFocus={() => setIsActive(true)} type="text" name="filter" id="filter"></input>
           <button onClick={() => setIsActive(true)} className="nav-link">Hae</button>
         </div>

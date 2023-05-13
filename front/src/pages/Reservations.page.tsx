@@ -16,18 +16,17 @@ const ReservationPage = () => {
     <main id="reservations">
       <h2>Varaukset</h2>
       <nav className="sub-nav">
-        <Link to="add">Lisää</Link>
         <Link to="list">Selaa</Link>
       </nav>
       <section id="content">
-        { isLoading ? (<em>Lataan varauksia..</em>) : (
+        {isLoading ? (<em>Lataan varauksia..</em>) : (
           <Routes>
-          <Route path="/" element={<ReservationsDash />} />
-          <Route path="list" element={
-            <ReservationsList reservations={reservations} />} />
-          <Route path="add" element={<AddReservation />} />
-          <Route path=":id" element={<ReservationDetails />} />
-        </Routes>
+            <Route path="/" element={<ReservationsDash />} />
+            <Route path="list" element={
+              <ReservationsList reservations={reservations} />} />
+            <Route path="add" element={<AddReservation />} />
+            <Route path=":id" element={<ReservationDetails />} />
+          </Routes>
         )}
       </section>
     </main>

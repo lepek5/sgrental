@@ -54,7 +54,7 @@ const AddProduct = () => {
         <input onChange={handleInputChange} type="text" name="description" id="description" /><br />
       </div>
       <div className="form-item">
-        <label htmlFor="tags">Tunnisteet (erottele pilkulla)</label>
+        <label htmlFor="tags">Tunnisteet (lisää tunniste painamalla enter)</label>
         <input onKeyDown={handleCategory} type="text" name="category" id="category" /><br />
       </div>
       {categories.map((category, idx) => <em key={idx}>{category} <span id={idx.toString()} onClick={

@@ -53,7 +53,7 @@ const ProductListing = () => {
         <h2>Vuokrattavat tuotteet</h2>
         <section id="content" style={{display: "flex", gap: "0.4rem", flexDirection: "row", justifyContent: "center"}}>
           <Routes>
-            <Route path="/" element={<ProductCards filter={filters} products={products} />} />
+            <Route path="/" element={<ProductCards filter={filters} products={filtered.length === 0 ? products : filtered} />} />
             <Route path=":id" element={<ProductDetails />} />
             <Route path=":id/reservation" element={<ProductReservation />} />
           </Routes>

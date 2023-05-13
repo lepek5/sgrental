@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>
-      <h1>Urheiluvälinevuokraamo Oy</h1>
+      <Link to="/"><h1>Urheiluvälinevuokraamo Oy</h1></Link>
       <div className="div" style={{display: "flex", gap: "0.9rem"}}>
         <Link className="main-nav" to="/">Etusivu</Link>
         <Link className="main-nav" to="/contact">Ota yhteyttä</Link>
