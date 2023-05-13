@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import productService from "../services/product.service";
@@ -14,7 +14,10 @@ const ProductDetails: React.FC = () => {
     <div className="product-details">
       <div className="title">{product.title}</div>
       <div className="body">
-        <div className="images">IMG IMG IMG</div>
+        <div className="images">
+        <div className="img">mock</div>
+        <div className="img">mock</div>
+        <div className="img">mock</div></div>
         <div className="description">{product.description}</div>
         <div className="price">Hinta per vuorokausi <span>{product.price}e</span></div>
       </div>

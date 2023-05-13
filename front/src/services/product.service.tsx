@@ -13,6 +13,10 @@ const getAll = async (): Promise<IProduct[]> => {
   });
   return products;
 }
+const getAllCategories = async () => {
+  const categories = await apiService.get("categories");
+  return categories.data;
+};
 const createProduct = async (product: IProduct): Promise<IProduct> => {
   const result = await apiService.post("products", product);
   return result.data;
@@ -23,4 +27,4 @@ const getById = async (id: string) => {
   return product;
 }
 
-export default { createProduct, getAll, getById };
+export default { createProduct, getAll, getById, getAllCategories };

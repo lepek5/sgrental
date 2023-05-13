@@ -19,5 +19,12 @@ const createCategory = async (cat: any ) => {
     throw err;
   }
 };
-const getAll = async () => {}
+const getAll = async () => {
+  try {
+    const categories = await Category.findAll();
+    return categories;
+  } catch (err) {
+    throw err;
+  }
+}
 export default { createCategory, getAll};

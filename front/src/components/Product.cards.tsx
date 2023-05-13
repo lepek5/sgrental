@@ -6,10 +6,12 @@ interface Props {
   filter: string | null
 }
 const ProductCards: React.FC<Props> = ({ products }) => {
+  if(products[0]?.title === undefined) return <></>
+  if (!products || products.length === 0 || products === undefined) return <></>
   return (
     <>
       {
-        products.map(f => <Product key={f.id} product={f} />)
+        products.map(f => f.id === undefined ? <></> : <Product key={`${f.id}-${f.title}`} product={f} />)
       }
     </>
   )

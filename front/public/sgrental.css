@@ -389,3 +389,32 @@ table#reservations td:hover {
   flex-direction: column;
   gap: 0.8rem;
 }
+
+.categories-filter {
+  background-color: var(--bright-green-blue);
+  color: var(--bluewhite);
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  right: 0;
+  position: absolute;
+  z-index: 5;
+}
+.img {
+  width: 50px;
+  height: 50px;
+  background-color: var(--bright-green-blue);
+  border-radius: 15px;
+  color: var(--bluewhite);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.images {
+  display: flex;
+  gap: 0.5rem;
+}
+.images .img:hover {
+  transform: scale(4);
+}
