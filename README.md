@@ -5,3 +5,7 @@ School project with docker
 - React
 - Express
 - MariaDB
+
+_Testikäyttäjät:_
+ - user / sala
+ - employee / sala
